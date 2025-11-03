@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <link rel="icon" href="/img/favicon.png" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WISUDA UNWAHAS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="/asset/fontawesome-free-7.1.0-web/css/all.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+    <!-- Diagram -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      /* Scrollbar Style */
+      .active {
+        background-color: #435ebe;
+        color: white;
+      }
+      aside::-webkit-scrollbar {
+        width: 3px;
+      }
+      main::-webkit-scrollbar {
+        width: 5px;
+      }
+      #boxTable::-webkit-scrollbar {
+        height: 4px;
+      }
+      #judul_skripsi::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      aside::-webkit-scrollbar-thumb,
+      #judul_skripsi::-webkit-scrollbar-thumb,
+      main::-webkit-scrollbar-thumb {
+        background: #c0c0c0;
+        border-radius: 10px;
+      }
+      #boxTable::-webkit-scrollbar-thumb {
+        background: #8c8e8d;
+        border-radius: 10px;
+      }
+
+      /* Datatables*/
+      div.dataTables_wrapper div.dt-buttons {
+        margin-bottom: 10px;
+      }
+      div.dataTables_wrapper div.dataTables_filter {
+        clear: both;
+        margin-bottom: 10px;
+      }
+      .ts-wrapper {
+        width: 100% !important;
+      }
+      .ts-dropdown {
+        width: 100% !important;
+      }
+    </style>
+  </head>
+  <body class="flex text-gray-700">
+    <!-- Tempat sidebar masuk -->
+    <div id="sidebar">
+      <!-- Sidebar -->
+      <aside
+        class="w-72 bg-white text-gray flex flex-col min-h-screen max-h-screen overflow-y-auto font-semibold"
+      >
+        <div class="p-4 text-2xl font-bold mt-[60px]"></div>
+
+        <nav class="flex-1 p-4 space-y-2">
+          <!-- Dashboard -->
+          <a
+            href="/mahasiswa"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="grid-outline"></ion-icon>
+            Dashboard
+          </a>
+          <div class="px-4 py-3 text-[0.8rem] text-gray-400">Pendaftaran</div>
+          <a
+            href="/mahasiswa/data-diri"
+            class="active flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="people-outline"></ion-icon>
+            Data Diri
+          </a>
+          <!-- Sertifikat -->
+          <div x-data="{ open: false }">
+            <button
+              @click="open = !open"
+              class="w-full flex gap-2 justify-between items-center px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <span>
+                <ion-icon name="documents-outline"></ion-icon>
+                Sertifikat
+              </span>
+              <svg
+                :class="{'rotate-90': open}"
+                class="w-4 h-4 transform transition-transform"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+            <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
+              <a
+                href="/mahasiswa/sertifikat-kompetensi"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Kompetensi
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-bahasa-internasional"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Bahasa Internasional
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-magang"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Magang
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-pendidikan-karakter"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Pendidikan Karakter
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-penghargaan"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Penghargaan
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-organisasi"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Organisasi
+              </a>
+            </div>
+          </div>
+          <!-- Download Formulir -->
+          <a
+            href="/mahasiswa/data-diri"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="cloud-download-outline"></ion-icon>
+            Download Formulir
+          </a>
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Konten utama -->
+    <main
+      class="w-full flex-1 bg-[#F2F7FF] relative p-6 pt-[100px] text-gray-700 h-screen overflow-y-auto"
+    >
+      <header
+        class="text-sm w-full bg-white flex justify-between items-center p-4 fixed top-0 right-0 z-50"
+      >
+        <div class="w-[170px]">
+          <img src="/img/logo_wisuda.jpg" alt="" />
+        </div>
+        <div class="relative">
+          <div id="userButton" class="rounded p-2 cursor-pointer">
+            <div class="flex items-center gap-1">
+              <img
+                src="https://sicantik.unwahas.ac.id/assets/images/Unwahas.png"
+                alt=""
+                class="w-[25px] h-[29px]"
+              />
+              <span>Farid Sunanda</span>
+              <svg
+                class="w-4 h-4 transform transition-transform rotate-90"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            id="userDropdown"
+            class="bg-white w-full rounded absolute right-0 top-[35px] mt-2 hidden"
+          >
+            <a
+              href="/aktor"
+              class="flex items-center gap-1 p-2 w-full border border-white hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <ion-icon
+                style="font-size: 1.2rem"
+                name="people-circle-outline"
+              ></ion-icon>
+              Ganti Role
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-1 p-2 w-full border border-white hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <ion-icon
+                name="arrow-undo-circle-outline"
+                style="font-size: 1.2rem"
+              ></ion-icon>
+              Back to SSO
+            </a>
+            <a
+              href="/"
+              class="bg-red-500 text-white flex items-center gap-1 p-2 block w-full border border-white hover:bg-red-600 transition"
+            >
+              <ion-icon
+                style="font-size: 1.2rem"
+                name="log-out-outline"
+              ></ion-icon>
+              Logout
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Foto Profil -->
+      <section
+        class="py-10 bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 mt-6 shadow-lg border border-gray-100"
+      >
+        <!-- Title -->
+        <h2
+          class="inline-block mb-6 text-lg font-semibold text-gray-700 border-b-4 border-[#435EBE] pb-1"
+        >
+          Foto Profil
+        </h2>
+        <form id="formMahasiswa" class="flex flex-col gap-6">
+          <div
+            class="flex flex-col sm:flex-row gap-6 items-start w-full bg-white p-6 rounded-xl shadow-sm border border-gray-100"
+          >
+            <!-- Foto Preview -->
+            <div
+              id="previewFoto"
+              class="w-[300px] h-[300px] rounded-xl bg-gray-100 bg-[url('/img/foto_profil.png')] bg-cover bg-center border border-gray-200 shadow-inner hover:shadow-md transition-all duration-300"
+            ></div>
+
+            <!-- Upload Area -->
+            <div class="flex flex-col justify-between gap-3 w-full">
+              <label for="foto_profil" class="font-semibold text-gray-700"
+                >Upload Foto Profil</label
+              >
+
+              <input
+                id="foto_profil"
+                name="foto_profil"
+                type="file"
+                accept="image/*"
+                class="block cursor-pointer w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#435EBE] file:text-white hover:file:bg-[#374BA1] cursor-pointer transition-all duration-200"
+              />
+
+              <p class="text-xs text-gray-500">
+                Format yang didukung: JPG, PNG. Maksimal 2MB.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex justify-end mt-6">
+            <button
+              type="button"
+              id="btnSubmit"
+              class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition transform hover:scale-105"
+            >
+              Simpan Data
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Biodata Diri -->
+      <section
+        class="py-10 bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 mt-6 shadow-lg border border-gray-100"
+      >
+        <!-- Title -->
+        <h2
+          class="inline-block mb-6 text-lg font-semibold text-gray-700 border-b-4 border-[#435EBE] pb-1"
+        >
+          Biodata Diri
+        </h2>
+        <form id="formMahasiswa" class="flex flex-col gap-6">
+          <div
+            class="grid md:grid-cols-2 bg-white p-6 rounded-xl shadow-sm gap-6"
+          >
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >Nama Lengkap</label
+              >
+              <input
+                type="text"
+                name="nama"
+                value="Hairudin Farid Sunanda"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                disabled
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >Tempat, Tgl Lahir</label
+              >
+              <input
+                type="text"
+                name="ttl"
+                value="Bengkulu, 23 Desember 2003"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                disabled
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-600">NIK</label>
+              <input
+                type="text"
+                name="nik"
+                value="34567890987654334567"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                disabled
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-600">NIM</label>
+              <input
+                type="text"
+                name="nim"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                value="21103041039"
+                disabled
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >NIRM</label
+              >
+              <input
+                type="text"
+                name="nirm"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                disabled
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >NIRL</label
+              >
+              <input
+                type="text"
+                name="nirl"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                disabled
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >Jenis Kelamin</label
+              >
+              <select
+                name="jenis_kelamin"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                disabled
+              >
+                <option value="">Pilih</option>
+                <option value="Laki-laki" selected>Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >Status Mahasiswa</label
+              >
+              <select
+                name="status"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                disabled
+              >
+                <option value="">Pilih</option>
+                <option value="Baru" selected>Baru</option>
+                <option value="Transfer">Transfer</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >Tahun Masuk</label
+              >
+              <input
+                type="number"
+                name="tahun_masuk"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                value="2021"
+                disabled
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >Fakultas</label
+              >
+              <input
+                type="text"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                value="Teknik"
+                disabled
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >Program Studi</label
+              >
+              <input
+                type="text"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                value="Teknik Informatika"
+                disabled
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >Alamat Rumah</label
+              >
+              <textarea
+                name="alamat_rumah"
+                rows="2"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                disabled
+              >
+              Jl. Lamongan Barat XIV Semarang, Jawa Tengah
+            </textarea
+              >
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >Nomor Telepon / HP</label
+              >
+              <input
+                type="text"
+                name="telp"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                value="082122195302"
+                disabled
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-600"
+                >Email</label
+              >
+              <input
+                type="email"
+                name="email"
+                class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                value="faridsunandatest@gmail.com"
+                disabled
+              />
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-xl shadow-sm">
+            <label class="block text-sm font-medium text-gray-600"
+              >Kesan dan Pesan</label
+            >
+            <textarea
+              name="kesan"
+              rows="3"
+              class="mt-1 w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            ></textarea>
+          </div>
+
+          <div class="flex justify-end mt-6">
+            <button
+              type="button"
+              id="btnSubmit"
+              class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition transform hover:scale-105"
+            >
+              Simpan Data
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Skripsi -->
+      <section
+        class="py-10 bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 mt-6 shadow-lg border border-gray-100"
+      >
+        <!-- Title -->
+        <h2
+          class="inline-block mb-6 text-lg font-semibold text-gray-700 border-b-4 border-[#435EBE] pb-1"
+        >
+          Detail Skripsi/TA/Tesis
+        </h2>
+        <form id="formMahasiswa" class="flex flex-col gap-6">
+          <div
+            class="grid md:grid-cols-2 bg-white p-6 rounded-xl shadow-sm gap-6"
+          >
+            <!-- Dosen Pembimbing -->
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label class="block text-sm font-medium text-gray-600">
+                  Dosen Pembimbing
+                </label>
+              </div>
+
+              <div id="dosenContainer" class="flex flex-col gap-3">
+                <!-- item default -->
+                <div class="flex items-center gap-2 dosen-item">
+                  <select
+                    name="dosen[]"
+                    class="w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  >
+                    <option value="">Pilih Dosen Pembimbing</option>
+                    <option value="Dr. Ahmad, M.Kom">Dr. Ahmad, M.Kom</option>
+                    <option value="Dr. Siti, M.T.">Dr. Siti, M.T.</option>
+                    <option value="Budi Santoso, M.Kom">
+                      Budi Santoso, M.Kom
+                    </option>
+                    <option value="Rina Wijaya, M.Kom">
+                      Rina Wijaya, M.Kom
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <button
+                type="button"
+                id="addDosen"
+                class="mt-4 flex items-center gap-2 bg-[#435EBE] hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg shadow-md transition transform hover:scale-105"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+                Tambah
+              </button>
+            </div>
+
+            <!-- Judul Skripsi -->
+            <div>
+              <label class="block text-sm font-medium text-gray-600">
+                Judul Skripsi / Tesis / TA
+              </label>
+              <textarea
+                id="judul_skripsi"
+                name="judul"
+                rows="3"
+                class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none bg-gray-100"
+                disabled
+              >
+Sistem Pendukung Keputusan Penentuan Beasiswa Berprestasi Madrasah Aliyah Fathul Huda Sayung Demak Menggunakan Metode ARAS (Additive Ratio Assessment).
+        </textarea
+              >
+            </div>
+          </div>
+
+          <!-- Tombol Simpan -->
+          <div class="flex justify-end mt-6">
+            <button
+              type="button"
+              id="btnSubmit"
+              class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition transform hover:scale-105"
+            >
+              Simpan Data
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- dosen pembimbing -->
+      <template id="dosenTemplate">
+        <div class="flex items-center gap-2 dosen-item">
+          <select
+            name="dosen[]"
+            class="w-full rounded-lg border border-gray-300 p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          >
+            <option value="">Pilih Dosen Pembimbing</option>
+            <option value="Dr. Ahmad, M.Kom">Dr. Ahmad, M.Kom</option>
+            <option value="Dr. Siti, M.T.">Dr. Siti, M.T.</option>
+            <option value="Budi Santoso, M.Kom">Budi Santoso, M.Kom</option>
+            <option value="Rina Wijaya, M.Kom">Rina Wijaya, M.Kom</option>
+          </select>
+          <button
+            type="button"
+            class="removeDosen text-red-500 hover:text-red-700 transition"
+            title="Hapus dosen ini"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+      </template>
+
+      <!-- Footer -->
+      <footer
+        class="absolute left-0 bg-white text-center w-full mt-[200px] py-4"
+      >
+        <span>
+          <a href="" class="hover:text-blue-800 font-semibold"> © UPT PSID </a>
+          | All Rights Reserved | Powered by
+          <a href="" class="hover:text-blue-800 font-semibold">
+            Universitas Wahid Hasyim
+          </a>
+        </span>
+      </footer>
+    </main>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      // Userbutton
+      const userButton = document.getElementById("userButton");
+      const userDropdown = document.getElementById("userDropdown");
+      userButton.addEventListener("mouseover", () => {
+        userDropdown.classList.remove("hidden");
+      });
+      userButton.addEventListener("mouseleave", (e) => {
+        if (!userDropdown.matches(":hover")) {
+          userDropdown.classList.add("hidden");
+        }
+      });
+      userDropdown.addEventListener("mouseleave", () => {
+        userDropdown.classList.add("hidden");
+      });
+      //Button Submit
+      const btn = document.getElementById("btnSubmit");
+      btn.addEventListener("click", () => {
+        const nama = document.querySelector('input[name="nama"]').value;
+        if (!nama) {
+          alert("Isi nama lengkap terlebih dahulu!");
+          return;
+        }
+
+        btn.textContent = "Menyimpan...";
+        btn.disabled = true;
+        btn.classList.add("bg-gray-400");
+
+        setTimeout(() => {
+          alert("Data berhasil disimpan");
+          btn.textContent = "Simpan Data";
+          btn.disabled = false;
+          btn.classList.remove("bg-gray-400");
+        }, 1200);
+      });
+
+      // Skripsi
+      const addDosenBtn = document.getElementById("addDosen");
+      const container = document.getElementById("dosenContainer");
+      const template = document.getElementById("dosenTemplate");
+
+      // Tambah dosen pembimbing dari template
+      addDosenBtn.addEventListener("click", () => {
+        const clone = template.content.cloneNode(true);
+        container.appendChild(clone);
+      });
+
+      // Hapus dosen pembimbing
+      container.addEventListener("click", (e) => {
+        if (e.target.closest(".removeDosen")) {
+          e.target.closest(".dosen-item").remove();
+        }
+      });
+
+      //Foto Profil
+      const inputFoto = document.getElementById("foto_profil");
+      const preview = document.getElementById("previewFoto");
+
+      inputFoto.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+          alert("File harus berupa gambar (JPG atau PNG)");
+          inputFoto.value = "";
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          preview.style.backgroundImage = `url('${event.target.result}')`;
+        };
+        reader.readAsDataURL(file);
+      });
+    </script>
+  </body>
+</html>

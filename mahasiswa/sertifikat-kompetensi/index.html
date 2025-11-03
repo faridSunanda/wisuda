@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <link rel="icon" href="/img/favicon.png" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WISUDA UNWAHAS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="/asset/fontawesome-free-7.1.0-web/css/all.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+    <!-- Diagram -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      /* Scrollbar Style */
+      .active {
+        background-color: #435ebe;
+        color: white;
+      }
+      aside::-webkit-scrollbar {
+        width: 3px;
+      }
+      main::-webkit-scrollbar {
+        width: 5px;
+      }
+      #boxTable::-webkit-scrollbar {
+        height: 4px;
+      }
+      aside::-webkit-scrollbar-thumb,
+      main::-webkit-scrollbar-thumb {
+        background: #c0c0c0;
+        border-radius: 10px;
+      }
+      #boxTable::-webkit-scrollbar-thumb {
+        background: #8c8e8d;
+        border-radius: 10px;
+      }
+
+      /* Datatables*/
+      div.dataTables_wrapper div.dt-buttons {
+        margin-bottom: 10px;
+      }
+      div.dataTables_wrapper div.dataTables_filter {
+        clear: both;
+        margin-bottom: 10px;
+      }
+      .ts-wrapper {
+        width: 100% !important;
+      }
+      .ts-dropdown {
+        width: 100% !important;
+      }
+    </style>
+  </head>
+  <body class="flex text-gray-700">
+    <!-- Tempat sidebar masuk -->
+    <div id="sidebar">
+      <!-- Sidebar -->
+      <aside
+        class="w-72 bg-white text-gray flex flex-col min-h-screen max-h-screen overflow-y-auto font-semibold"
+      >
+        <div class="p-4 text-2xl font-bold mt-[60px]"></div>
+
+        <nav class="flex-1 p-4 space-y-2">
+          <!-- Dashboard -->
+          <a
+            href="/mahasiswa"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="grid-outline"></ion-icon>
+            Dashboard
+          </a>
+          <div class="px-4 py-3 text-[0.8rem] text-gray-400">Pendaftaran</div>
+          <a
+            href="/mahasiswa/data-diri"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="people-outline"></ion-icon>
+            Data Diri
+          </a>
+          <!-- Sertifikat -->
+          <div x-data="{ open: false }">
+            <button
+              @click="open = !open"
+              class="active w-full flex gap-2 justify-between items-center px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <span>
+                <ion-icon name="documents-outline"></ion-icon>
+                Sertifikat
+              </span>
+              <svg
+                :class="{'rotate-90': open}"
+                class="w-4 h-4 transform transition-transform"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+            <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
+              <a
+                href="/mahasiswa/sertifikat-kompetensi"
+                class="active block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Kompetensi
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-bahasa-internasional"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Bahasa Internasional
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-magang"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Magang
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-pendidikan-karakter"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Pendidikan Karakter
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-penghargaan"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Penghargaan
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-organisasi"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Organisasi
+              </a>
+            </div>
+          </div>
+          <!-- Download Formulir -->
+          <a
+            href="/mahasiswa/data-diri"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="cloud-download-outline"></ion-icon>
+            Download Formulir
+          </a>
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Konten utama -->
+    <main
+      class="w-full flex-1 bg-[#F2F7FF] relative p-6 pt-[100px] text-gray-700 h-screen overflow-y-auto"
+    >
+      <header
+        class="text-sm w-full bg-white flex justify-between items-center p-4 fixed top-0 right-0 z-50"
+      >
+        <div class="w-[170px]">
+          <img src="/img/logo_wisuda.jpg" alt="" />
+        </div>
+        <div class="relative">
+          <div id="userButton" class="rounded p-2 cursor-pointer">
+            <div class="flex items-center gap-1">
+              <img
+                src="https://sicantik.unwahas.ac.id/assets/images/Unwahas.png"
+                alt=""
+                class="w-[25px] h-[29px]"
+              />
+              <span>Farid Sunanda</span>
+              <svg
+                class="w-4 h-4 transform transition-transform rotate-90"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            id="userDropdown"
+            class="bg-white w-full rounded absolute right-0 top-[35px] mt-2 hidden"
+          >
+            <a
+              href="/aktor"
+              class="flex items-center gap-1 p-2 w-full border border-white hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <ion-icon
+                style="font-size: 1.2rem"
+                name="people-circle-outline"
+              ></ion-icon>
+              Ganti Role
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-1 p-2 w-full border border-white hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <ion-icon
+                name="arrow-undo-circle-outline"
+                style="font-size: 1.2rem"
+              ></ion-icon>
+              Back to SSO
+            </a>
+            <a
+              href="/"
+              class="bg-red-500 text-white flex items-center gap-1 p-2 block w-full border border-white hover:bg-red-600 transition"
+            >
+              <ion-icon
+                style="font-size: 1.2rem"
+                name="log-out-outline"
+              ></ion-icon>
+              Logout
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Sertifikat -->
+      <section
+        class="py-10 bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 mt-6 shadow-lg border border-gray-100"
+      >
+        <!-- Title -->
+        <h2
+          class="inline-block mb-6 text-lg font-semibold text-gray-700 border-b-4 border-[#435EBE] pb-1"
+        >
+          Sertifikat Kompetensi
+        </h2>
+        <p
+          class="flex text-sm py-3 items-center gap-1 mb-3 border-l-4 pl-2 border-orange-400 text-orange-600 bg-orange-100"
+        >
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          Isi minimal 1 sertifikat dan maksimal 5 sertifikat.
+        </p>
+
+        <form id="formSertifikat" class="flex flex-col gap-8">
+          <!-- Wadah untuk semua sertifikat -->
+          <div id="sertifikatContainer" class="flex flex-col gap-6">
+            <!-- Template entri sertifikat -->
+            <div
+              class="sertifikat-item bg-white shadow-sm border border-gray-100 rounded-xl p-6 relative transition-all duration-300 hover:shadow-md"
+            >
+              <div class="flex justify-between">
+                <div class="w-[32%]">
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Nama Sertifikat</label
+                  >
+                  <input
+                    type="text"
+                    name="nama_sertifikat[]"
+                    placeholder="Contoh: Web Programming Dasar"
+                    class="w-full rounded-lg ring-1 ring-gray-300 bg-gray-50 p-3 outline-none focus:ring-2 focus:ring-blue-600 transition"
+                  />
+                </div>
+
+                <div class="w-[32%]">
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Penerbit</label
+                  >
+                  <input
+                    type="text"
+                    name="penerbit[]"
+                    placeholder="Contoh: Universitas Wahid Hasyim"
+                    class="w-full rounded-lg ring-1 ring-gray-300 bg-gray-50 p-3 outline-none focus:ring-2 focus:ring-blue-600 transition"
+                  />
+                </div>
+
+                <div class="w-[32%]">
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    >Tanggal Terbit</label
+                  >
+                  <input
+                    type="date"
+                    name="tanggal_terbit[]"
+                    class="w-full rounded-lg ring-1 ring-gray-300 bg-gray-50 p-3 outline-none focus:ring-2 focus:ring-blue-600 transition"
+                  />
+                </div>
+              </div>
+
+              <!-- Tombol hapus -->
+              <button
+                type="button"
+                class="hapusItem absolute -top-3 -right-3 bg-white border border-red-200 text-red-500 hover:bg-red-500 hover:text-white rounded-full w-8 h-8 flex items-center justify-center shadow-sm transition"
+                title="Hapus entri ini"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tombol tambah sertifikat -->
+          <div class="flex justify-start">
+            <button
+              type="button"
+              id="tambahSertifikat"
+              class="flex items-center gap-2 bg-[#435EBE] hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg shadow-md transition transform hover:scale-105"
+            >
+              <i class="fa-solid fa-plus text-sm"></i> Tambah Sertifikat
+            </button>
+          </div>
+
+          <!-- Tombol simpan -->
+          <div class="flex justify-end mt-2">
+            <button
+              type="submit"
+              class="bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-lg shadow-md transition transform hover:scale-105"
+            >
+              Simpan Data
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Footer -->
+      <footer
+        class="absolute left-0 bg-white text-center w-full mt-[200px] py-4"
+      >
+        <span>
+          <a href="" class="hover:text-blue-800 font-semibold"> © UPT PSID </a>
+          | All Rights Reserved | Powered by
+          <a href="" class="hover:text-blue-800 font-semibold">
+            Universitas Wahid Hasyim
+          </a>
+        </span>
+      </footer>
+    </main>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      // Userbutton
+      const userButton = document.getElementById("userButton");
+      const userDropdown = document.getElementById("userDropdown");
+      userButton.addEventListener("mouseover", () => {
+        userDropdown.classList.remove("hidden");
+      });
+      userButton.addEventListener("mouseleave", (e) => {
+        if (!userDropdown.matches(":hover")) {
+          userDropdown.classList.add("hidden");
+        }
+      });
+      userDropdown.addEventListener("mouseleave", () => {
+        userDropdown.classList.add("hidden");
+      });
+
+      // Sertifikat
+      const container = document.getElementById("sertifikatContainer");
+      const btnTambah = document.getElementById("tambahSertifikat");
+
+      btnTambah.addEventListener("click", () => {
+        const clone = container.firstElementChild.cloneNode(true);
+        clone.querySelectorAll("input").forEach((el) => (el.value = ""));
+        clone.classList.add("animate-sertifikat");
+        container.appendChild(clone);
+      });
+
+      container.addEventListener("click", (e) => {
+        if (e.target.closest(".hapusItem")) {
+          if (container.children.length > 1) {
+            e.target.closest(".sertifikat-item").remove();
+          } else {
+            alert("Minimal satu sertifikat harus ada.");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal Wisuda - Universitas Wahid Hasyim</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        box-sizing: border-box;
+      }
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          #1e40af 0%,
+          #3b82f6 50%,
+          #60a5fa 100%
+        );
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+      <div class="container mx-auto px-4 py-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <div
+              class="w-12 h-12 bg-white rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-graduation-cap text-blue-600 text-xl"></i>
+            </div>
+            <div>
+              <h1 class="text-2xl font-bold">Portal Wisuda</h1>
+              <p class="text-blue-100">Universitas Wahid Hasyim</p>
+            </div>
+          </div>
+          <nav class="hidden md:flex space-x-6">
+            <a href="#beranda" class="hover:text-blue-200 transition-colors"
+              >Beranda</a
+            >
+            <a href="#jadwal" class="hover:text-blue-200 transition-colors"
+              >Jadwal</a
+            >
+            <a href="#persyaratan" class="hover:text-blue-200 transition-colors"
+              >Persyaratan</a
+            >
+            <a href="#kontak" class="hover:text-blue-200 transition-colors"
+              >Kontak</a
+            >
+          </nav>
+          <button class="md:hidden text-white">
+            <i class="fas fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="gradient-bg text-white py-20">
+      <div class="container mx-auto px-4 text-center">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-5xl font-bold mb-6">
+            Selamat Datang di Portal Wisuda
+          </h2>
+          <p class="text-xl mb-8 text-blue-100">
+            Informasi lengkap mengenai wisuda Universitas Wahid Hasyim periode
+            2024
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+            >
+              <i class="fas fa-calendar-alt mr-2"></i>Lihat Jadwal
+            </button>
+            <button
+              class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+            >
+              <i class="fas fa-download mr-2"></i>Unduh Panduan
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pengumuman Penting -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h3 class="text-3xl font-bold text-gray-800 mb-4">
+            Pengumuman Penting
+          </h3>
+          <div class="w-24 h-1 bg-blue-600 mx-auto"></div>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-6">
+            <div class="flex items-start">
+              <i
+                class="fas fa-exclamation-triangle text-yellow-400 text-xl mr-4 mt-1"
+              ></i>
+              <div>
+                <h4 class="text-lg font-semibold text-yellow-800 mb-2">
+                  Batas Waktu Pendaftaran
+                </h4>
+                <p class="text-yellow-700">
+                  Pendaftaran wisuda periode Maret 2024 akan ditutup pada
+                  tanggal 15 Februari 2024. Pastikan semua berkas sudah lengkap.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-blue-50 border-l-4 border-blue-400 p-6 mb-6">
+            <div class="flex items-start">
+              <i class="fas fa-info-circle text-blue-400 text-xl mr-4 mt-1"></i>
+              <div>
+                <h4 class="text-lg font-semibold text-blue-800 mb-2">
+                  Gladi Bersih Wisuda
+                </h4>
+                <p class="text-blue-700">
+                  Gladi bersih wisuda akan dilaksanakan pada tanggal 20 Maret
+                  2024 pukul 08.00 WIB di Auditorium Utama.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jadwal Wisuda -->
+    <section id="jadwal" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h3 class="text-3xl font-bold text-gray-800 mb-4">Jadwal Wisuda</h3>
+          <div class="w-24 h-1 bg-blue-600 mx-auto mb-4"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Jadwal pelaksanaan wisuda periode Maret 2024
+          </p>
+        </div>
+
+        <div class="max-w-6xl mx-auto">
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Hari 1 -->
+            <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+              <div class="text-center mb-4">
+                <div
+                  class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <i class="fas fa-calendar-day text-blue-600 text-2xl"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-800">Hari Pertama</h4>
+                <p class="text-blue-600 font-semibold">22 Maret 2024</p>
+              </div>
+              <div class="space-y-3">
+                <div class="flex items-center text-gray-600">
+                  <i class="fas fa-clock mr-3 text-blue-500"></i>
+                  <span>08.00 - 12.00 WIB</span>
+                </div>
+                <div class="flex items-center text-gray-600">
+                  <i class="fas fa-graduation-cap mr-3 text-blue-500"></i>
+                  <span>Fakultas Teknik & MIPA</span>
+                </div>
+                <div class="flex items-center text-gray-600">
+                  <i class="fas fa-users mr-3 text-blue-500"></i>
+                  <span>±150 Wisudawan</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hari 2 -->
+            <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+              <div class="text-center mb-4">
+                <div
+                  class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <i class="fas fa-calendar-day text-green-600 text-2xl"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-800">Hari Kedua</h4>
+                <p class="text-green-600 font-semibold">23 Maret 2024</p>
+              </div>
+              <div class="space-y-3">
+                <div class="flex items-center text-gray-600">
+                  <i class="fas fa-clock mr-3 text-green-500"></i>
+                  <span>08.00 - 12.00 WIB</span>
+                </div>
+                <div class="flex items-center text-gray-600">
+                  <i class="fas fa-graduation-cap mr-3 text-green-500"></i>
+                  <span>Fakultas Ekonomi & Bisnis</span>
+                </div>
+                <div class="flex items-center text-gray-600">
+                  <i class="fas fa-users mr-3 text-green-500"></i>
+                  <span>±200 Wisudawan</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hari 3 -->
+            <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+              <div class="text-center mb-4">
+                <div
+                  class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <i class="fas fa-calendar-day text-purple-600 text-2xl"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-800">Hari Ketiga</h4>
+                <p class="text-purple-600 font-semibold">24 Maret 2024</p>
+              </div>
+              <div class="space-y-3">
+                <div class="flex items-center text-gray-600">
+                  <i class="fas fa-clock mr-3 text-purple-500"></i>
+                  <span>08.00 - 12.00 WIB</span>
+                </div>
+                <div class="flex items-center text-gray-600">
+                  <i class="fas fa-graduation-cap mr-3 text-purple-500"></i>
+                  <span>Fakultas Hukum & Sosial</span>
+                </div>
+                <div class="flex items-center text-gray-600">
+                  <i class="fas fa-users mr-3 text-purple-500"></i>
+                  <span>±180 Wisudawan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Persyaratan -->
+    <section id="persyaratan" class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h3 class="text-3xl font-bold text-gray-800 mb-4">
+            Persyaratan Wisuda
+          </h3>
+          <div class="w-24 h-1 bg-blue-600 mx-auto mb-4"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Dokumen dan persyaratan yang harus dipenuhi untuk mengikuti wisuda
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Persyaratan Akademik -->
+            <div class="bg-blue-50 rounded-xl p-6">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4"
+                >
+                  <i class="fas fa-book text-white text-xl"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-800">
+                  Persyaratan Akademik
+                </h4>
+              </div>
+              <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-blue-600 mr-3 mt-1"></i>
+                  <span>Telah menyelesaikan seluruh mata kuliah</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-blue-600 mr-3 mt-1"></i>
+                  <span>IPK minimal 2.00</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-blue-600 mr-3 mt-1"></i>
+                  <span>Tidak ada tunggakan mata kuliah</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-blue-600 mr-3 mt-1"></i>
+                  <span>Skripsi/Tugas Akhir telah disetujui</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Persyaratan Administrasi -->
+            <div class="bg-green-50 rounded-xl p-6">
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4"
+                >
+                  <i class="fas fa-file-alt text-white text-xl"></i>
+                </div>
+                <h4 class="text-xl font-bold text-gray-800">
+                  Persyaratan Administrasi
+                </h4>
+              </div>
+              <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                  <span>Tidak ada tunggakan keuangan</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                  <span>Foto 4x6 sebanyak 4 lembar</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                  <span>Fotocopy KTP dan KK</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fas fa-check-circle text-green-600 mr-3 mt-1"></i>
+                  <span>Surat keterangan sehat</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Alur Pendaftaran -->
+          <div class="mt-12 bg-gray-50 rounded-xl p-8">
+            <h4 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+              Alur Pendaftaran Wisuda
+            </h4>
+            <div class="grid md:grid-cols-4 gap-6">
+              <div class="text-center">
+                <div
+                  class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <span class="text-white font-bold text-xl">1</span>
+                </div>
+                <h5 class="font-semibold text-gray-800 mb-2">
+                  Verifikasi Berkas
+                </h5>
+                <p class="text-sm text-gray-600">
+                  Pastikan semua berkas lengkap dan sesuai
+                </p>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <span class="text-white font-bold text-xl">2</span>
+                </div>
+                <h5 class="font-semibold text-gray-800 mb-2">Daftar Online</h5>
+                <p class="text-sm text-gray-600">
+                  Mengisi formulir pendaftaran online
+                </p>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <span class="text-white font-bold text-xl">3</span>
+                </div>
+                <h5 class="font-semibold text-gray-800 mb-2">Pembayaran</h5>
+                <p class="text-sm text-gray-600">
+                  Melakukan pembayaran biaya wisuda
+                </p>
+              </div>
+              <div class="text-center">
+                <div
+                  class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <span class="text-white font-bold text-xl">4</span>
+                </div>
+                <h5 class="font-semibold text-gray-800 mb-2">Konfirmasi</h5>
+                <p class="text-sm text-gray-600">
+                  Mendapat konfirmasi keikutsertaan
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="kontak" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h3 class="text-3xl font-bold text-gray-800 mb-4">
+            Informasi Kontak
+          </h3>
+          <div class="w-24 h-1 bg-blue-600 mx-auto mb-4"></div>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Hubungi kami untuk informasi lebih lanjut mengenai wisuda
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="grid md:grid-cols-3 gap-8">
+            <!-- Telepon -->
+            <div
+              class="bg-white rounded-xl shadow-lg p-6 text-center card-hover"
+            >
+              <div
+                class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i class="fas fa-phone text-blue-600 text-2xl"></i>
+              </div>
+              <h4 class="text-xl font-bold text-gray-800 mb-2">Telepon</h4>
+              <p class="text-gray-600 mb-4">Hubungi kami langsung</p>
+              <p class="text-blue-600 font-semibold">(024) 8505681</p>
+            </div>
+
+            <!-- Email -->
+            <div
+              class="bg-white rounded-xl shadow-lg p-6 text-center card-hover"
+            >
+              <div
+                class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i class="fas fa-envelope text-green-600 text-2xl"></i>
+              </div>
+              <h4 class="text-xl font-bold text-gray-800 mb-2">Email</h4>
+              <p class="text-gray-600 mb-4">Kirim pertanyaan via email</p>
+              <p class="text-green-600 font-semibold">wisuda@unwahas.ac.id</p>
+            </div>
+
+            <!-- Lokasi -->
+            <div
+              class="bg-white rounded-xl shadow-lg p-6 text-center card-hover"
+            >
+              <div
+                class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <i class="fas fa-map-marker-alt text-purple-600 text-2xl"></i>
+              </div>
+              <h4 class="text-xl font-bold text-gray-800 mb-2">Lokasi</h4>
+              <p class="text-gray-600 mb-4">Kunjungi kampus kami</p>
+              <p class="text-purple-600 font-semibold">
+                Jl. Menoreh Tengah X/22, Sampangan, Semarang
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="col-span-2">
+            <div class="flex items-center space-x-4 mb-4">
+              <div
+                class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-graduation-cap text-white text-xl"></i>
+              </div>
+              <div>
+                <h4 class="text-xl font-bold">Universitas Wahid Hasyim</h4>
+                <p class="text-gray-400">Portal Wisuda</p>
+              </div>
+            </div>
+            <p class="text-gray-400 mb-4">
+              Universitas Islam terkemuka di Semarang yang berkomitmen
+              menghasilkan lulusan berkualitas dan berakhlak mulia.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition-colors"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition-colors"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Menu Utama</h5>
+            <ul class="space-y-2 text-gray-400">
+              <li>
+                <a href="#beranda" class="hover:text-white transition-colors"
+                  >Beranda</a
+                >
+              </li>
+              <li>
+                <a href="#jadwal" class="hover:text-white transition-colors"
+                  >Jadwal Wisuda</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#persyaratan"
+                  class="hover:text-white transition-colors"
+                  >Persyaratan</a
+                >
+              </li>
+              <li>
+                <a href="#kontak" class="hover:text-white transition-colors"
+                  >Kontak</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 class="text-lg font-semibold mb-4">Informasi</h5>
+            <ul class="space-y-2 text-gray-400">
+              <li>Jl. Menoreh Tengah X/22</li>
+              <li>Sampangan, Semarang</li>
+              <li>Jawa Tengah 50236</li>
+              <li>Indonesia</li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>
+            &copy; 2024 Universitas Wahid Hasyim. Semua hak cipta dilindungi.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scrolling untuk navigasi
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Mobile menu toggle
+      const mobileMenuButton = document.querySelector("button.md\\:hidden");
+      const nav = document.querySelector("nav");
+
+      if (mobileMenuButton) {
+        mobileMenuButton.addEventListener("click", function () {
+          nav.classList.toggle("hidden");
+        });
+      }
+
+      // Animasi fade in saat scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe semua card
+      document.querySelectorAll(".card-hover").forEach((card) => {
+        card.style.opacity = "0";
+        card.style.transform = "translateY(20px)";
+        card.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        observer.observe(card);
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'992760506553e791',t:'MTc2MTExOTEzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
