@@ -228,7 +228,7 @@
       </h2>
 
       <!-- Dashboard -->
-      <section class="py-16 bg-white rounded-md">
+      <section class="py-16 bg-white rounded-md border">
         <div class="flex justify-between p-6">
           <div
             class="w-[32%] relative h-[150px] bg-white rounded-md p-6 font-semibold shadow-md"
@@ -271,6 +271,38 @@
             ></span>
           </div>
         </div>
+
+        <div class="mx-auto px-6 flex justify-between">
+          <!-- Pie Chart 1: Berdasarkan Fakultas -->
+          <div
+            class="bg-white p-6 shadow-md rounded-xl border border-gray-100 w-[32%]"
+          >
+            <h3 class="font-semibold mb-4 text-gray-700 text-center">
+              Wisudawan Berdasarkan Fakultas
+            </h3>
+            <canvas id="fakultasChart"></canvas>
+          </div>
+
+          <!-- Pie Chart 1: Berdasarkan Fakultas -->
+          <div
+            class="bg-white p-6 shadow-md rounded-xl border border-gray-100 w-[32%]"
+          >
+            <h3 class="font-semibold mb-4 text-gray-700 text-center">
+              Wisudawan Berdasarkan Tahun Masuk
+            </h3>
+            <canvas id="tahunMasukChart"></canvas>
+          </div>
+
+          <!-- Pie Chart 2: Berdasarkan Jenis Kelamin -->
+          <div
+            class="bg-white p-6 shadow-md rounded-xl border border-gray-100 w-[32%]"
+          >
+            <h3 class="font-semibold mb-4 text-gray-700 text-center">
+              Wisudawan Berdasarkan Jenis Kelamin
+            </h3>
+            <canvas id="genderChart"></canvas>
+          </div>
+        </div>
       </section>
 
       <!-- Footer -->
@@ -291,11 +323,90 @@
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
     ></script>
+
     <script
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+
     <script>
+      const dataFakultas = {
+        labels: [
+          "Fakultas Teknik",
+          "Fakultas Hukum",
+          "Fakultas Ekonomi",
+          "Fakultas Kedokteran",
+        ],
+        values: [50, 30, 40, 20],
+      };
+
+      const dataTahunMasuk = {
+        labels: ["2021", "2020", "2019", "2018"],
+        values: [642, 321, 13, 23],
+      };
+
+      const dataGender = {
+        labels: ["Laki-laki", "Perempuan"],
+        values: [60, 80],
+      };
+
+      //  Pie Chart Fakultas
+      const ctxFakultas = document
+        .getElementById("fakultasChart")
+        .getContext("2d");
+      new Chart(ctxFakultas, {
+        type: "pie",
+        data: {
+          labels: dataFakultas.labels,
+          datasets: [
+            {
+              data: dataFakultas.values,
+              backgroundColor: ["#60A5FA", "#34D399", "#FBBF24", "#F87171"],
+            },
+          ],
+        },
+        options: {
+          plugins: { legend: { position: "bottom" } },
+        },
+      });
+
+      const ctxTahunMasuk = document
+        .getElementById("tahunMasukChart")
+        .getContext("2d");
+      new Chart(ctxTahunMasuk, {
+        type: "pie",
+        data: {
+          labels: dataTahunMasuk.labels,
+          datasets: [
+            {
+              data: dataTahunMasuk.values,
+              backgroundColor: ["#34D399", "#60A5FA", "#F87171", "#FBBF24"],
+            },
+          ],
+        },
+        options: {
+          plugins: { legend: { position: "bottom" } },
+        },
+      });
+
+      //  Pie Chart Gender
+      const ctxGender = document.getElementById("genderChart").getContext("2d");
+      new Chart(ctxGender, {
+        type: "pie",
+        data: {
+          labels: dataGender.labels,
+          datasets: [
+            {
+              data: dataGender.values,
+              backgroundColor: ["#818CF8", "#F472B6"],
+            },
+          ],
+        },
+        options: {
+          plugins: { legend: { position: "bottom" } },
+        },
+      });
+
       // Userbutton
       const userButton = document.getElementById("userButton");
       const userDropdown = document.getElementById("userDropdown");
