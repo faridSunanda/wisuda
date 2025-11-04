@@ -16,6 +16,39 @@
     ></script>
     <!-- Diagram -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Datatables -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables Core -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/datatables.net-dt@1.13.8/css/jquery.dataTables.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/datatables.net@1.13.8/js/jquery.dataTables.min.js"></script>
+
+    <!-- DataTables Buttons Extension -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/datatables.net-buttons-dt@2.4.3/css/buttons.dataTables.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@2.4.3/js/dataTables.buttons.min.js"></script>
+
+    <!-- Export dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <!-- Buttons for export -->
+    <script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@2.4.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@2.4.3/js/buttons.print.min.js"></script>
+
+    <!-- Tom Select -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
     <style>
       /* Scrollbar Style */
       .active {
@@ -43,6 +76,14 @@
         background: #8c8e8d;
         border-radius: 10px;
       }
+      /* Datatables*/
+      div.dataTables_wrapper div.dt-buttons {
+        margin-bottom: 10px;
+      }
+      div.dataTables_wrapper div.dataTables_filter {
+        clear: both;
+        margin-bottom: 10px;
+      }
     </style>
   </head>
   <body class="flex text-gray-700">
@@ -57,29 +98,29 @@
         <nav class="flex-1 p-4 space-y-2">
           <!-- Dashboard -->
           <a
-            href="/mahasiswa"
-            class="active flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+            href="/admin"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
           >
             <ion-icon name="grid-outline"></ion-icon>
             Dashboard
           </a>
-          <div class="px-4 py-3 text-[0.8rem] text-gray-400">Pendaftaran</div>
+          <div class="px-4 py-3 text-[0.8rem] text-gray-400">Menu</div>
           <a
-            href="/mahasiswa/data-diri"
+            href="/admin/data-wisudawan"
             class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
           >
             <ion-icon name="people-outline"></ion-icon>
-            Data Diri
+            Data Wisudawan
           </a>
-          <!-- Sertifikat -->
-          <div x-data="{ open: false }">
+          <!-- Setting -->
+          <div x-data="{ open: true }">
             <button
               @click="open = !open"
-              class="w-full flex gap-2 justify-between items-center px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              class="w-full flex justify-between items-center px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
             >
-              <span>
-                <ion-icon name="documents-outline"></ion-icon>
-                Sertifikat
+              <span class="flex items-center gap-2">
+                <ion-icon name="settings-outline"></ion-icon>
+                Setting
               </span>
               <svg
                 :class="{'rotate-90': open}"
@@ -99,51 +140,43 @@
             </button>
             <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
               <a
-                href="/mahasiswa/sertifikat-kompetensi"
+                href="/admin/alur-pendaftaran"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Sertifikat Kompetensi
+                Alur Pendaftaran
               </a>
               <a
-                href="/mahasiswa/sertifikat-bahasa-internasional"
+                href="/admin/jadwal-pendaftaran"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Sertifikat Bahasa Internasional
+                Jadwal Pendaftaran
               </a>
               <a
-                href="/mahasiswa/sertifikat-magang"
+                href="/admin/jadwal-wisuda"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Sertifikat Magang
+                Jadwal Wisuda
               </a>
               <a
-                href="/mahasiswa/sertifikat-pendidikan-karakter"
+                href="/admin/dokumen-persyaratan"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Sertifikat Pendidikan Karakter
+                Dokumen Persyaratan
               </a>
               <a
-                href="/mahasiswa/sertifikat-penghargaan"
+                href="/admin/surat-tanda-terima"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Sertifikat Penghargaan
+                Surat Tanda Terima
               </a>
               <a
-                href="/mahasiswa/sertifikat-organisasi"
-                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+                href="/admin/kuota-wisudawan"
+                class="active block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Sertifikat Organisasi
+                Kuota Wisudawan
               </a>
             </div>
           </div>
-          <!-- Download Formulir -->
-          <a
-            href="/mahasiswa/data-diri"
-            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-          >
-            <ion-icon name="cloud-download-outline"></ion-icon>
-            Download Formulir
-          </a>
         </nav>
       </aside>
     </div>
@@ -224,84 +257,59 @@
       <h2
         class="inline-block mb-6 text-lg font-semibold text-gray-700 border-b-4 border-[#435EBE] pb-1"
       >
-        Dashboard
+        Kuota Wisudawan
       </h2>
 
       <!-- Dashboard -->
-      <section class="py-16 bg-white rounded-md border">
-        <div class="flex justify-between p-6">
-          <div
-            class="w-[32%] relative h-[150px] bg-white rounded-md p-6 font-semibold shadow-md"
+      <section class="p-8 bg-white rounded-md">
+        <!--  -->
+        <div class="mb-4 flex justify-end items-center">
+          <!-- Tombol tambah -->
+          <button
+            id="buttonOpenModal"
+            class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow"
           >
-            <p>Wisudawan Verified</p>
-            <span class="text-3xl font-bold">128</span>
-            <span
-              class="absolute bottom-6 left-6 w-[85%] h-[3px] rounded bg-green-300"
-            >
-            </span>
-            <span
-              class="absolute top-6 right-6 w-[70px] h-[50px] rounded bg-green-300"
-            ></span>
-          </div>
-          <div
-            class="w-[32%] relative h-[150px] bg-white rounded-md p-6 font-semibold shadow-md"
-          >
-            <p>Wisudawan Not Verified</p>
-            <span class="text-3xl font-bold">98</span>
-            <span
-              class="absolute bottom-6 left-6 w-[85%] h-[3px] rounded bg-[#96cafa]"
-            >
-            </span>
-            <span
-              class="absolute top-6 right-6 w-[70px] h-[50px] rounded bg-[#96cafa]"
-            ></span>
-            <div></div>
-          </div>
-          <div
-            class="w-[32%] relative h-[150px] bg-white rounded-md p-6 font-semibold shadow-md"
-          >
-            <p>Mahasiswa Lulus</p>
-            <span class="text-3xl font-bold">1020</span>
-            <span
-              class="absolute bottom-6 left-6 w-[85%] h-[3px] rounded bg-[#FF8A8A]"
-            >
-            </span>
-            <span
-              class="absolute top-6 right-6 w-[70px] h-[50px] rounded bg-[#FF8A8A]"
-            ></span>
-          </div>
+            <ion-icon name="add-outline"></ion-icon>Tambah
+          </button>
         </div>
 
-        <div class="mx-auto px-6 flex justify-between">
-          <!-- Pie Chart 1: Berdasarkan Fakultas -->
-          <div
-            class="bg-white p-6 shadow-md rounded-xl border border-gray-100 w-[32%]"
+        <div id="boxTable" class="w-full py-2">
+          <table
+            id="mydatatable"
+            class="text-gray-500 min-w-full border-collapse border border-gray-100"
           >
-            <h3 class="font-semibold mb-4 text-gray-700 text-center">
-              Wisudawan Berdasarkan Fakultas
-            </h3>
-            <canvas id="fakultasChart"></canvas>
-          </div>
-
-          <!-- Pie Chart 1: Berdasarkan Fakultas -->
-          <div
-            class="bg-white p-6 shadow-md rounded-xl border border-gray-100 w-[32%]"
-          >
-            <h3 class="font-semibold mb-4 text-gray-700 text-center">
-              Wisudawan Berdasarkan Tahun Masuk
-            </h3>
-            <canvas id="tahunMasukChart"></canvas>
-          </div>
-
-          <!-- Pie Chart 2: Berdasarkan Jenis Kelamin -->
-          <div
-            class="bg-white p-6 shadow-md rounded-xl border border-gray-100 w-[32%]"
-          >
-            <h3 class="font-semibold mb-4 text-gray-700 text-center">
-              Wisudawan Berdasarkan Jenjang
-            </h3>
-            <canvas id="jenjangChart"></canvas>
-          </div>
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-4">No</th>
+                <th class="p-4">Tahun Wisuda</th>
+                <th class="p-4">Jumlah Kuota</th>
+                <th class="p-4">Aksi</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
+                <td class="px-4 py-3 border">1</td>
+                <td class="px-4 py-3 border">2025</td>
+                <td class="px-4 py-3 border">1300</td>
+                <td class="px-4 py-3 border text-center">
+                  <div class="flex justify-center gap-1">
+                    <button
+                      class="bg-yellow-500 buttonDeleteModalConfirmation hover:bg-yellow-600 text-white px-[8px] py-[7px] rounded transition text-xs"
+                      title="Edit"
+                    >
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <button
+                      class="bg-red-500 buttonDeleteModalConfirmation hover:bg-red-600 text-white px-[8px] py-[7px] rounded transition text-xs"
+                      title="Hapus"
+                    >
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
@@ -330,85 +338,6 @@
     ></script>
 
     <script>
-      const dataFakultas = {
-        labels: [
-          "Fakultas Teknik",
-          "Fakultas Hukum",
-          "Fakultas Ekonomi",
-          "Fakultas Kedokteran",
-        ],
-        values: [50, 30, 40, 20],
-      };
-
-      const dataTahunMasuk = {
-        labels: ["2021", "2020", "2019", "2018"],
-        values: [642, 321, 13, 23],
-      };
-
-      const dataJenjang = {
-        labels: ["S1", "S2", "S3"],
-        values: [630, 80, 17],
-      };
-
-      //  Pie Chart Fakultas
-      const ctxFakultas = document
-        .getElementById("fakultasChart")
-        .getContext("2d");
-      new Chart(ctxFakultas, {
-        type: "pie",
-        data: {
-          labels: dataFakultas.labels,
-          datasets: [
-            {
-              data: dataFakultas.values,
-              backgroundColor: ["#60A5FA", "#34D399", "#FBBF24", "#F87171"],
-            },
-          ],
-        },
-        options: {
-          plugins: { legend: { position: "bottom" } },
-        },
-      });
-
-      const ctxTahunMasuk = document
-        .getElementById("tahunMasukChart")
-        .getContext("2d");
-      new Chart(ctxTahunMasuk, {
-        type: "pie",
-        data: {
-          labels: dataTahunMasuk.labels,
-          datasets: [
-            {
-              data: dataTahunMasuk.values,
-              backgroundColor: ["#34D399", "#60A5FA", "#F87171", "#FBBF24"],
-            },
-          ],
-        },
-        options: {
-          plugins: { legend: { position: "bottom" } },
-        },
-      });
-
-      //  Pie Chart Jenjang
-      const ctxJenjang = document
-        .getElementById("jenjangChart")
-        .getContext("2d");
-      new Chart(ctxJenjang, {
-        type: "pie",
-        data: {
-          labels: dataJenjang.labels,
-          datasets: [
-            {
-              data: dataJenjang.values,
-              backgroundColor: ["#818CF8", "#F472B6", "#FBBF24"],
-            },
-          ],
-        },
-        options: {
-          plugins: { legend: { position: "bottom" } },
-        },
-      });
-
       // Userbutton
       const userButton = document.getElementById("userButton");
       const userDropdown = document.getElementById("userDropdown");
@@ -422,6 +351,22 @@
       });
       userDropdown.addEventListener("mouseleave", () => {
         userDropdown.classList.add("hidden");
+      });
+      // Datatables
+      $(document).ready(function () {
+        var table = $("#mydatatable").DataTable({
+          dom: "Bflrtip",
+          buttons: ["excelHtml5", "pdfHtml5", "print"],
+          initComplete: function () {
+            // Styling
+            $("div.dataTables_filter input").addClass(
+              "border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-0 focus:border-gray-400"
+            );
+            $("div.dataTables_length select").addClass(
+              "border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-0 focus-border-gray-400"
+            );
+          },
+        });
       });
     </script>
   </body>

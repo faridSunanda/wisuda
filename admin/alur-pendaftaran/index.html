@@ -107,13 +107,13 @@
           <div class="px-4 py-3 text-[0.8rem] text-gray-400">Menu</div>
           <a
             href="/admin/data-wisudawan"
-            class="active flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
           >
             <ion-icon name="people-outline"></ion-icon>
             Data Wisudawan
           </a>
           <!-- Setting -->
-          <div x-data="{ open: false }">
+          <div x-data="{ open: true }">
             <button
               @click="open = !open"
               class="w-full flex justify-between items-center px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
@@ -141,7 +141,7 @@
             <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
               <a
                 href="/admin/alur-pendaftaran"
-                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+                class="active block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
                 Alur Pendaftaran
               </a>
