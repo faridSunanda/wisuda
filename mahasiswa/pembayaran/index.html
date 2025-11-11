@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <link rel="icon" href="/img/favicon.png" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WISUDA UNWAHAS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="/asset/fontawesome-free-7.1.0-web/css/all.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+    <!-- Diagram -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      /* Scrollbar Style */
+      .active {
+        background-color: #435ebe;
+        color: white;
+      }
+      aside::-webkit-scrollbar {
+        width: 3px;
+      }
+      main::-webkit-scrollbar {
+        width: 5px;
+      }
+      #boxTable::-webkit-scrollbar {
+        height: 4px;
+      }
+      #judul_skripsi::-webkit-scrollbar {
+        width: 2px;
+      }
+
+      aside::-webkit-scrollbar-thumb,
+      #judul_skripsi::-webkit-scrollbar-thumb,
+      main::-webkit-scrollbar-thumb {
+        background: #c0c0c0;
+        border-radius: 10px;
+      }
+      #boxTable::-webkit-scrollbar-thumb {
+        background: #8c8e8d;
+        border-radius: 10px;
+      }
+
+      /* Datatables*/
+      div.dataTables_wrapper div.dt-buttons {
+        margin-bottom: 10px;
+      }
+      div.dataTables_wrapper div.dataTables_filter {
+        clear: both;
+        margin-bottom: 10px;
+      }
+      .ts-wrapper {
+        width: 100% !important;
+      }
+      .ts-dropdown {
+        width: 100% !important;
+      }
+    </style>
+  </head>
+  <body class="flex text-gray-700">
+    <!-- Tempat sidebar masuk -->
+    <div id="sidebar">
+      <!-- Sidebar -->
+      <aside
+        class="w-72 bg-white text-gray flex flex-col min-h-screen max-h-screen overflow-y-auto font-semibold"
+      >
+        <div class="p-4 text-2xl font-bold mt-[60px]"></div>
+
+        <nav class="flex-1 p-4 space-y-2">
+          <!-- Dashboard -->
+          <a
+            href="/mahasiswa"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="grid-outline"></ion-icon>
+            Dashboard
+          </a>
+          <div class="px-4 py-3 text-[0.8rem] text-gray-400">Pendaftaran</div>
+          <a
+            href="/mahasiswa/pembayaran"
+            class="active flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="card-outline"></ion-icon>
+            Pembayaran
+          </a>
+          <a
+            href="/mahasiswa/data-diri"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="people-outline"></ion-icon>
+            Data Diri
+          </a>
+          <!-- Sertifikat -->
+          <div x-data="{ open: false }">
+            <button
+              @click="open = !open"
+              class="w-full flex gap-2 justify-between items-center px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <span>
+                <ion-icon name="documents-outline"></ion-icon>
+                Sertifikat
+              </span>
+              <svg
+                :class="{'rotate-90': open}"
+                class="w-4 h-4 transform transition-transform"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+            <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
+              <a
+                href="/mahasiswa/sertifikat-kompetensi"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Kompetensi
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-bahasa-internasional"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Bahasa Internasional
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-magang"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Magang
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-pendidikan-karakter"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Pendidikan Karakter
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-penghargaan"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Penghargaan
+              </a>
+              <a
+                href="/mahasiswa/sertifikat-organisasi"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sertifikat Organisasi
+              </a>
+            </div>
+          </div>
+          <!-- Download Formulir -->
+          <a
+            href="/mahasiswa/data-diri"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="cloud-download-outline"></ion-icon>
+            Download Formulir
+          </a>
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Konten utama -->
+    <main
+      class="w-full flex-1 bg-[#F2F7FF] relative p-6 pt-[100px] text-gray-700 h-screen overflow-y-auto"
+    >
+      <header
+        class="text-sm w-full bg-white flex justify-between items-center p-4 fixed top-0 right-0 z-50"
+      >
+        <div class="w-[170px]">
+          <img src="/img/logo_wisuda.jpg" alt="" />
+        </div>
+        <div class="relative">
+          <div id="userButton" class="rounded p-2 cursor-pointer">
+            <div class="flex items-center gap-1">
+              <img
+                src="https://sicantik.unwahas.ac.id/assets/images/Unwahas.png"
+                alt=""
+                class="w-[25px] h-[29px]"
+              />
+              <span>Farid Sunanda</span>
+              <svg
+                class="w-4 h-4 transform transition-transform rotate-90"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            id="userDropdown"
+            class="bg-white w-full rounded absolute right-0 top-[35px] mt-2 hidden"
+          >
+            <a
+              href="/aktor"
+              class="flex items-center gap-1 p-2 w-full border border-white hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <ion-icon
+                style="font-size: 1.2rem"
+                name="people-circle-outline"
+              ></ion-icon>
+              Ganti Role
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-1 p-2 w-full border border-white hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <ion-icon
+                name="arrow-undo-circle-outline"
+                style="font-size: 1.2rem"
+              ></ion-icon>
+              Back to SSO
+            </a>
+            <a
+              href="/"
+              class="bg-red-500 text-white flex items-center gap-1 p-2 block w-full border border-white hover:bg-red-600 transition"
+            >
+              <ion-icon
+                style="font-size: 1.2rem"
+                name="log-out-outline"
+              ></ion-icon>
+              Logout
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- Pembayaran -->
+      <section
+        class="py-10 bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 mt-6 shadow-lg border border-gray-100"
+      >
+        <!-- Title -->
+        <h2
+          class="inline-block mb-6 text-lg font-semibold text-gray-700 border-b-4 border-[#435EBE] pb-1"
+        >
+          Pembayaran
+        </h2>
+        <p
+          class="flex text-sm py-3 items-center gap-1 mb-3 border-l-4 pl-2 border-orange-400 text-orange-600 bg-orange-100"
+        >
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          Lakukan pembayaran sebesar Rp1.800.000 untuk melanjutkan tahap
+          pendaftaran
+        </p>
+        <table>
+          <thead class="bg-gray-100">
+            <tr>
+              <th
+                class="px-4 py-3 text-left text-sm font-semibold text-gray-700"
+              >
+                Total Tagihan
+              </th>
+              <th
+                class="px-8 py-3 text-left text-sm font-semibold text-gray-700"
+              >
+                No Briva
+              </th>
+              <th
+                class="px-4 py-3 text-left text-sm font-semibold text-gray-700"
+              >
+                Aksi
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hover:bg-gray-50">
+              <td class="px-4 py-2">
+                <span class="font-semibold">Rp1.800.000</span>
+              </td>
+              <td class="px-8 py-2">7654323456776543212</td>
+              <td class="px-4 py-2">
+                <button
+                  class="bg-[#435ebe] hover:bg-blue-700 text-white py-2 px-4 rounded-lg text-sm transition-all"
+                >
+                  Bayar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="flex items-center gap-2"></div>
+        <!-- Paste ke halaman yang sudah memuat Tailwind -->
+        <div class="w-full mt-8">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="text-2xl font-semibold">
+                Tutorial Pembayaran <span class="text-indigo-600">BRIVA</span>
+              </h3>
+              <p class="mt-1 text-sm text-gray-500">
+                Pilih metode pembayaran, lalu ikuti langkahnya. Simpan
+                bukti/struk setelah bayar.
+              </p>
+            </div>
+            <div class="text-right">
+              <p class="text-xs text-gray-400">Kode BRIVA</p>
+              <div class="mt-1 flex items-center gap-2">
+                <input
+                  id="vaInput"
+                  data-va="7654323456776543212"
+                  value="7654323456776543212"
+                  readonly
+                  class="w-56 px-3 py-2 border rounded-lg bg-gray-50 text-sm font-mono"
+                />
+                <button
+                  id="copyBtn"
+                  class="px-3 py-2 text-sm rounded-lg border hover:bg-gray-100"
+                >
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="mt-6">
+            <nav class="flex gap-2 border-b pb-2">
+              <button
+                data-tab="brimo"
+                class="tab-btn px-3 py-2 rounded-md text-sm bg-indigo-50 text-indigo-700"
+              >
+                BRImo (m-banking BRI)
+              </button>
+              <button
+                data-tab="atm-bri"
+                class="tab-btn px-3 py-2 rounded-md text-sm"
+              >
+                ATM BRI
+              </button>
+              <button
+                data-tab="internet"
+                class="tab-btn px-3 py-2 rounded-md text-sm"
+              >
+                Internet Banking BRI
+              </button>
+              <button
+                data-tab="other"
+                class="tab-btn px-3 py-2 rounded-md text-sm"
+              >
+                m-banking / ATM Bank Lain
+              </button>
+              <button
+                data-tab="teller"
+                class="tab-btn px-3 py-2 rounded-md text-sm"
+              >
+                Teller / Bank
+              </button>
+            </nav>
+
+            <!-- Content -->
+            <div class="mt-4">
+              <section data-panel="brimo" class="tab-panel">
+                <h4 class="font-semibold">BRImo (Aplikasi BRImo)</h4>
+                <ol
+                  class="mt-3 list-decimal list-inside text-sm space-y-2 text-gray-700"
+                >
+                  <li>Buka aplikasi BRImo — login.</li>
+                  <li>
+                    Pilih menu <strong>Pembayaran</strong> →
+                    <strong>BRIVA</strong> (atau Virtual Account).
+                  </li>
+                  <li>
+                    Masukkan
+                    <span class="font-mono" id="vaDisplay1"></span> (kode BRIVA)
+                    lalu tekan <strong>Lanjut</strong>.
+                  </li>
+                  <li>
+                    Periksa nama merchant dan jumlah. Jika benar, konfirmasi
+                    transaksi.
+                  </li>
+                  <li>Simpan screenshot atau unduh bukti pembayaran.</li>
+                </ol>
+                <p class="mt-3 text-xs text-gray-500">
+                  Catatan: Beberapa versi BRImo menampilkan menu "Virtual
+                  Account" atau "BRIVA" di halaman utama.
+                </p>
+              </section>
+
+              <section data-panel="atm-bri" class="tab-panel hidden">
+                <h4 class="font-semibold">ATM BRI</h4>
+                <ol
+                  class="mt-3 list-decimal list-inside text-sm space-y-2 text-gray-700"
+                >
+                  <li>Masukkan kartu dan PIN di mesin ATM BRI.</li>
+                  <li>
+                    Pilih <strong>Transaksi Lainnya</strong> →
+                    <strong>Transfer</strong> →
+                    <strong>Ke Rek BRI</strong> (atau Virtual Account jika
+                    tersedia).
+                  </li>
+                  <li>
+                    Masukkan nomor BRIVA (<span
+                      class="font-mono"
+                      id="vaDisplay2"
+                    ></span
+                    >), tekan <strong>Benar</strong>.
+                  </li>
+                  <li>
+                    Periksa detail (merchant & jumlah). Lanjutkan dan ambil
+                    struk sebagai bukti.
+                  </li>
+                </ol>
+              </section>
+
+              <section data-panel="internet" class="tab-panel hidden">
+                <h4 class="font-semibold">Internet Banking BRI</h4>
+                <ol
+                  class="mt-3 list-decimal list-inside text-sm space-y-2 text-gray-700"
+                >
+                  <li>Login ke Internet Banking BRI.</li>
+                  <li>
+                    Pilih menu <strong>Transfer</strong> →
+                    <strong>Virtual Account</strong> atau
+                    <strong>Transfer ke Rekening BRI</strong>.
+                  </li>
+                  <li>
+                    Masukkan kode BRIVA (<span
+                      class="font-mono"
+                      id="vaDisplay3"
+                    ></span
+                    >), lalu ikuti instruksi konfirmasi.
+                  </li>
+                  <li>Download/print bukti pembayaran jika perlu.</li>
+                </ol>
+              </section>
+
+              <section data-panel="other" class="tab-panel hidden">
+                <h4 class="font-semibold">
+                  m-banking / ATM Bank Lain (contoh umum)
+                </h4>
+                <ol
+                  class="mt-3 list-decimal list-inside text-sm space-y-2 text-gray-700"
+                >
+                  <li>Buka aplikasi m-banking bank kamu atau gunakan ATM.</li>
+                  <li>
+                    Pilih menu <strong>Transfer</strong> →
+                    <strong>Ke Rekening Bank Lain</strong> atau
+                    <strong>Virtual Account</strong>.
+                  </li>
+                  <li>
+                    Untuk beberapa bank: pilih
+                    <strong>Transfer > Virtual Account</strong>, lalu masukkan
+                    kode BRIVA (<span class="font-mono" id="vaDisplay4"></span
+                    >).
+                  </li>
+                  <li>
+                    Periksa nama merchant dan jumlah, konfirmasi. Simpan bukti
+                    pembayaran.
+                  </li>
+                </ol>
+                <p class="mt-2 text-xs text-gray-500">
+                  Tip: Jika metode pembayaran tidak ada kata "BRIVA", pilih
+                  "Virtual Account" atau pilih transfer antar bank lalu masukkan
+                  BRIVA sebagai nomor rekening.
+                </p>
+              </section>
+
+              <section data-panel="teller" class="tab-panel hidden">
+                <h4 class="font-semibold">
+                  Via Teller / Bank (Bayar langsung ke bank)
+                </h4>
+                <ol
+                  class="mt-3 list-decimal list-inside text-sm space-y-2 text-gray-700"
+                >
+                  <li>
+                    Datang ke cabang bank, bilang mau bayar via
+                    <strong>BRIVA / Virtual Account</strong>.
+                  </li>
+                  <li>
+                    Berikan kode BRIVA (<span
+                      class="font-mono"
+                      id="vaDisplay5"
+                    ></span
+                    >) dan jumlah kepada petugas.
+                  </li>
+                  <li>
+                    Petugas akan memproses dan memberi struk; simpan sebagai
+                    bukti.
+                  </li>
+                </ol>
+              </section>
+            </div>
+          </div>
+
+          <!-- Notes / Tips -->
+          <div class="mt-6 bg-gray-50 p-4 rounded-lg text-sm text-gray-700">
+            <ul class="list-disc list-inside space-y-2">
+              <li>Periksa nama merchant dan jumlah sebelum konfirmasi.</li>
+              <li>
+                Simpan bukti pembayaran / screenshot sampai status di merchant
+                terupdate.
+              </li>
+              <li>Nomor BRIVA bersifat unik — masukkan tanpa spasi.</li>
+              <li>
+                Jika gagal, cek kembali nomor dan saldo; hubungi bank atau
+                merchant jika perlu.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer
+        class="absolute left-0 bg-white text-center w-full mt-[200px] py-4"
+      >
+        <span>
+          <a href="" class="hover:text-blue-800 font-semibold"> © UPT PSID </a>
+          | All Rights Reserved | Powered by
+          <a href="" class="hover:text-blue-800 font-semibold">
+            Universitas Wahid Hasyim
+          </a>
+        </span>
+      </footer>
+    </main>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      // Userbutton
+      const userButton = document.getElementById("userButton");
+      const userDropdown = document.getElementById("userDropdown");
+      userButton.addEventListener("mouseover", () => {
+        userDropdown.classList.remove("hidden");
+      });
+      userButton.addEventListener("mouseleave", (e) => {
+        if (!userDropdown.matches(":hover")) {
+          userDropdown.classList.add("hidden");
+        }
+      });
+      userDropdown.addEventListener("mouseleave", () => {
+        userDropdown.classList.add("hidden");
+      });
+
+      (function () {
+        // Fill visible VA displays from input
+        const vaInput = document.getElementById("vaInput");
+        const va =
+          vaInput.getAttribute("data-va") ||
+          vaInput.value ||
+          "7654323456776543212";
+        [
+          "vaDisplay1",
+          "vaDisplay2",
+          "vaDisplay3",
+          "vaDisplay4",
+          "vaDisplay5",
+        ].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = va;
+        });
+
+        // Copy button
+        document
+          .getElementById("copyBtn")
+          .addEventListener("click", async () => {
+            try {
+              await navigator.clipboard.writeText(va);
+              const btn = document.getElementById("copyBtn");
+              const old = btn.textContent;
+              btn.textContent = "Copied";
+              setTimeout(() => (btn.textContent = old), 1500);
+            } catch (e) {
+              alert("Gagal copy — silakan copy manual: " + va);
+            }
+          });
+
+        // Tabs logic
+        const tabs = document.querySelectorAll(".tab-btn");
+        const panels = document.querySelectorAll(".tab-panel");
+        tabs.forEach((t, idx) => {
+          t.addEventListener("click", () => {
+            tabs.forEach((x) =>
+              x.classList.remove("bg-indigo-50", "text-indigo-700")
+            );
+            panels.forEach((p) => p.classList.add("hidden"));
+            t.classList.add("bg-indigo-50", "text-indigo-700");
+            const panel = document.querySelector(
+              `[data-panel="${t.getAttribute("data-tab")}"]`
+            );
+            if (panel) panel.classList.remove("hidden");
+          });
+        });
+        // Activate first tab
+        if (tabs.length) tabs[0].click();
+      })();
+    </script>
+  </body>
+</html>
