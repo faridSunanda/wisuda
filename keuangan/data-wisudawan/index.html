@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <link rel="icon" href="/img/favicon.png" type="image/x-icon" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WISUDA UNWAHAS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="/asset/fontawesome-free-7.1.0-web/css/all.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+      defer
+    ></script>
+    <!-- Diagram -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Datatables -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables Core -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/datatables.net-dt@1.13.8/css/jquery.dataTables.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/datatables.net@1.13.8/js/jquery.dataTables.min.js"></script>
+
+    <!-- DataTables Buttons Extension -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/datatables.net-buttons-dt@2.4.3/css/buttons.dataTables.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@2.4.3/js/dataTables.buttons.min.js"></script>
+
+    <!-- Export dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <!-- Buttons for export -->
+    <script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@2.4.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@2.4.3/js/buttons.print.min.js"></script>
+
+    <!-- Tom Select -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
+    <style>
+      /* Scrollbar Style */
+      .active {
+        background-color: #435ebe;
+        color: white;
+      }
+      aside::-webkit-scrollbar,
+      #itemCheckList::-webkit-scrollbar {
+        width: 3px;
+      }
+      main::-webkit-scrollbar {
+        width: 5px;
+      }
+      #boxTable::-webkit-scrollbar {
+        height: 4px;
+      }
+      main::-webkit-scrollbar-thumb {
+        background: #c0c0c0;
+        border-radius: 10px;
+      }
+      aside:hover::-webkit-scrollbar-thumb {
+        background: #c0c0c0;
+        border-radius: 10px;
+      }
+      #boxTable::-webkit-scrollbar-thumb {
+        background: #8c8e8d;
+        border-radius: 10px;
+      }
+      /* Datatables*/
+      div.dataTables_wrapper div.dt-buttons {
+        margin-bottom: 10px;
+      }
+      div.dataTables_wrapper div.dataTables_filter {
+        clear: both;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body class="flex text-gray-700">
+    <!-- Tempat sidebar masuk -->
+    <div id="sidebar">
+      <!-- Sidebar -->
+      <aside
+        class="w-72 bg-white text-gray flex flex-col min-h-screen max-h-screen overflow-y-auto font-semibold"
+      >
+        <div class="p-4 text-2xl font-bold mt-[60px]"></div>
+
+        <nav class="flex-1 p-4 space-y-2">
+          <!-- Dashboard -->
+          <a
+            href="/keuangan"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="grid-outline"></ion-icon>
+            Dashboard
+          </a>
+          <div class="px-4 py-3 text-[0.8rem] text-gray-400">Menu</div>
+          <a
+            href="/keuangan/data-wisudawan"
+            class="active flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="people-outline"></ion-icon>
+            Data Wisudawan
+          </a>
+        </nav>
+      </aside>
+    </div>
+
+    <!-- Konten utama -->
+    <main
+      class="w-full flex-1 bg-[#F2F7FF] relative p-6 pt-[100px] text-gray-700 h-screen overflow-y-auto"
+    >
+      <header
+        class="text-sm w-full bg-white flex justify-between items-center p-4 fixed top-0 right-0 z-50"
+      >
+        <div class="w-[170px]">
+          <img src="/img/logo_wisuda.jpg" alt="" />
+        </div>
+        <div class="relative">
+          <div id="userButton" class="rounded p-2 cursor-pointer">
+            <div class="flex items-center gap-1">
+              <img
+                src="https://sicantik.unwahas.ac.id/assets/images/Unwahas.png"
+                alt=""
+                class="w-[25px] h-[29px]"
+              />
+              <span>Farid Sunanda</span>
+              <svg
+                class="w-4 h-4 transform transition-transform rotate-90"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            id="userDropdown"
+            class="bg-white w-full rounded absolute right-0 top-[35px] mt-2 hidden"
+          >
+            <a
+              href="/aktor"
+              class="flex items-center gap-1 p-2 w-full border border-white hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <ion-icon
+                style="font-size: 1.2rem"
+                name="people-circle-outline"
+              ></ion-icon>
+              Ganti Role
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-1 p-2 w-full border border-white hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <ion-icon
+                name="arrow-undo-circle-outline"
+                style="font-size: 1.2rem"
+              ></ion-icon>
+              Back to SSO
+            </a>
+            <a
+              href="/"
+              class="bg-red-500 text-white flex items-center gap-1 p-2 block w-full border border-white hover:bg-red-600 transition"
+            >
+              <ion-icon
+                style="font-size: 1.2rem"
+                name="log-out-outline"
+              ></ion-icon>
+              Logout
+            </a>
+          </div>
+        </div>
+      </header>
+      <!-- Title -->
+      <h2
+        class="inline-block mb-6 text-lg font-semibold text-gray-700 border-b-4 border-[#435EBE] pb-1"
+      >
+        Data Wisudawan
+      </h2>
+
+      <!-- Dashboard -->
+      <section class="p-8 bg-white rounded-md">
+        <!--  -->
+        <div class="mb-4 flex justify-end items-center">
+          <!-- Tombol tambah -->
+          <button
+            id="buttonOpenFitur"
+            class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow"
+          >
+            <ion-icon name="filter-outline"></ion-icon> Filter
+          </button>
+        </div>
+
+        <div id="boxTable" class="w-full py-2">
+          <table
+            id="mydatatable"
+            class="text-gray-500 min-w-full border-collapse border border-gray-100"
+          >
+            <thead class="bg-gray-100">
+              <tr>
+                <th class="p-4">No</th>
+                <th class="p-4">Nama Lengkap</th>
+                <th class="p-4">NIM</th>
+                <th class="p-4">Tahun Masuk</th>
+                <th class="p-4">Jenjang</th>
+                <th class="p-4">Fakultas</th>
+                <th class="p-4">Prodi</th>
+                <th class="p-4">Aksi</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
+                <td class="px-4 py-3 border">1</td>
+                <td class="px-4 py-3 border text-blue-500 uppercase">
+                  Hairudin Farid Sunanda
+                </td>
+                <td class="px-4 py-3 border">21103041039</td>
+                <td class="px-4 py-3 border">2021</td>
+                <td class="px-4 py-3 border">S1</td>
+                <td class="px-4 py-3 border">Teknik</td>
+                <td class="px-4 py-3 border">Teknik Informatika</td>
+                <td class="px-4 py-3 border text-center">
+                  <div class="flex justify-center gap-1">
+                    <button
+                      id="buttonOpenModal"
+                      class="h-8 w-8 flex items-center justify-center bg-green-500 hover:bg-green-600 text-white rounded transition"
+                      title="Check List"
+                    >
+                      <ion-icon name="checkmark-done-outline"></ion-icon>
+                    </button>
+                    <button
+                      class="h-8 w-8 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded transition"
+                      title="Show Details"
+                    >
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
+                <td class="px-4 py-3 border">2</td>
+                <td class="px-4 py-3 border text-blue-500 uppercase">
+                  Farid Sunanda
+                </td>
+                <td class="px-4 py-3 border">21103041009</td>
+                <td class="px-4 py-3 border">2021</td>
+                <td class="px-4 py-3 border">S1</td>
+                <td class="px-4 py-3 border">Teknik</td>
+                <td class="px-4 py-3 border">Teknik Informatika</td>
+                <td class="px-4 py-3 border text-center">
+                  <div class="flex justify-center gap-1">
+                    <button
+                      id="buttonOpenModal"
+                      class="h-8 w-8 flex items-center justify-center bg-green-500 hover:bg-green-600 text-white rounded transition"
+                      title="Check List"
+                    >
+                      <ion-icon name="checkmark-done-outline"></ion-icon>
+                    </button>
+                    <button
+                      class="h-8 w-8 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded transition"
+                      title="Show Details"
+                    >
+                      <ion-icon name="eye-outline"></ion-icon>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer
+        class="absolute left-0 bg-white text-center w-full mt-[200px] py-4"
+      >
+        <span>
+          <a href="" class="hover:text-blue-800 font-semibold"> © UPT PSID </a>
+          | All Rights Reserved | Powered by
+          <a href="" class="hover:text-blue-800 font-semibold">
+            Universitas Wahid Hasyim
+          </a>
+        </span>
+      </footer>
+    </main>
+
+    <!-- Modal Check List -->
+    <section
+      id="modalCheckList"
+      class="absolute top-0 left-0 z-50 bg-black/50 w-full min-h-screen flex justify-center items-center hidden transition-opacity"
+    >
+      <div
+        id="itemCheckList"
+        class="bg-white p-8 rounded-md max-h-[90vh] max-w-[97%] overflow-y-auto opacity-0 scale-95 transition-all duration-300"
+      >
+        <span
+          class="flex items-center gap-2 font-semibold border-b-2 border-blue-600"
+        >
+          <ion-icon name="person-circle-outline"></ion-icon> Farid Sunanda
+        </span>
+        <form action="">
+          <table>
+            <thead>
+              <tr>
+                <th class="p-4">No</th>
+                <th class="p-4">Kelengkapan Berkas</th>
+                <th class="p-4">Jumlah Berkas</th>
+                <th class="p-4 w-48">Ada / Tidak Ada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="p-2 border">1</td>
+                <td class="p-2 border">Formulir pendaftaran</td>
+                <td class="p-2 border text-center">1 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">2</td>
+                <td class="p-2 border">
+                  FC Ijazah terakhir (SLTA/D3/S1/S2) yang dilegalisir
+                </td>
+                <td class="p-2 border text-center">4 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">3</td>
+                <td class="p-2 border">FC Transkrip sementara</td>
+                <td class="p-2 border text-center">1 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">4</td>
+                <td class="p-2 border">
+                  Fotocopi Kartu Tanda Penduduk atau Paspor bagi mahasiswa Warga
+                  Negara Asing
+                </td>
+                <td class="p-2 border text-center">1 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">5</td>
+                <td class="p-2 border">
+                  FC lembar pengesahan skripsi/tugas akhir/tesis/disertasi yang
+                  sudah ditandatangani dosen penguji dan pembimbing
+                </td>
+                <td class="p-2 border text-center">4 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">6</td>
+                <td class="p-2 border">
+                  FC cover judul skripsi/tugas akhir /tesis/disertasi
+                </td>
+                <td class="p-2 border text-center">1 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">7</td>
+                <td class="p-2 border">
+                  FC Sertifikat PKKMB dan Orientasi Keaswajaan
+                </td>
+                <td class="p-2 border text-center">1 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">8</td>
+                <td class="p-2 border">
+                  <p>
+                    12 lembar foto ukuran 3x4: <br />
+                    • Untuk Mahasiswa S2 dan S3 Pria : Hitam putih (kertas
+                    doft), berjas warna gelap, berdasi dan kemeja putih, tidak
+                    boleh memakai peci dan tidak boleh memakai kacamata. Wanita
+                    : Hitam putih (kertas doft), blaser warna gelap, kemeja
+                    putih, kerudung warna gelap bagi yang berjilbab dan tidak
+                    boleh memakai kacamata <br />
+                    • Untuk Mahasiswa S1 Pria : Hitam putih (kertas doft),
+                    berjas almamater (terlihat logo Universitas), berdasi dan
+                    kemeja putih, tidak boleh memakai peci dan tidak boleh
+                    memakai kacamata. Wanita : Hitam putih (kertas doft), berjas
+                    almamater (terlihat logo Universitas), kemeja putih,
+                    kerudung warna gelap bagi yang berjilbab dan tidak boleh
+                    memakai kacamata
+                  </p>
+                </td>
+                <td class="p-2 border text-center">4 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">9</td>
+                <td class="p-2 border">
+                  FC Sertifikat Pendukung Kompetensi sesuai bidang program studi
+                  (max. 3)
+                </td>
+                <td class="p-2 border text-center">1 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">10</td>
+                <td class="p-2 border">
+                  FC Sertifikat Pengalaman Organisasi, disarankan tidak
+                  berafiliasi pada Ormas/Parpol (max. 5)
+                </td>
+                <td class="p-2 border text-center">1 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">11</td>
+                <td class="p-2 border">
+                  FC Sertifikat Prestasi Olahraga, PKM, Seni dan lain-lain (max.
+                  5)
+                </td>
+                <td class="p-2 border text-center">4 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">12</td>
+                <td class="p-2 border">Bukti Lunas Administrasi Keuangan</td>
+                <td class="p-2 border text-center">
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    class="border w-16 outline-none ring-0 focus:ring-1 rounded-md p-1"
+                  />
+                </td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">13</td>
+                <td class="p-2 border">
+                  Surat Bebas Administrasi Perpustakaan
+                </td>
+                <td class="p-2 border text-center">
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    class="border w-16 outline-none ring-0 focus:ring-1 rounded-md p-1"
+                  />
+                </td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">14</td>
+                <td class="p-2 border">
+                  Surat Bebas Administrasi Laboratorium
+                </td>
+                <td class="p-2 border text-center">
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    class="border w-16 outline-none ring-0 focus:ring-1 rounded-md p-1"
+                  />
+                </td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">15</td>
+                <td class="p-2 border">
+                  Surat Keterangan Bebas Administrasi Laporan Beasiswa Bidikmisi
+                  / KIP
+                </td>
+                <td class="p-2 border text-center">1 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">16</td>
+                <td class="p-2 border">
+                  Sertifikat Workshop Karir dan Kewirausahaan (S1 Reguler)
+                </td>
+                <td class="p-2 border text-center">1 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+              <tr>
+                <td class="p-2 border">17</td>
+                <td class="p-2 border">
+                  STOPMAP berwarna :
+                  <br />
+                  1. Fakultas Ekonomi = Krem <br />
+                  2. Fakultas Ilmu Sosial dan Ilmu Politik = Orange <br />
+                  3. Fakultas Teknik = Biru Tua <br />
+                  4. Fakultas Pertanian = Coklat <br />
+                  5. Fakultas Farmasi = Putih Tulang <br />
+                  6. Fakultas Hukum = Merah <br />
+                  7. Fakultas Keguruan dan Ilmu Pendidikan = Kuning <br />
+                  8. Fakultas Agama Islam = Hijau Muda <br />
+                  9. Fakultas Kedokteran = Hijau
+                </td>
+                <td class="p-2 border text-center">1 lbr</td>
+                <td class="p-2 border text-center">
+                  <input type="checkbox" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="mt-4 flex justify-end gap-2">
+            <button
+              type="button"
+              id="buttonCloseModal"
+              class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Modal Fitur -->
+    <section
+      id="modalFitur"
+      class="absolute top-0 left-0 z-50 bg-black/70 w-full min-h-screen flex justify-center items-center hidden transition-opacity"
+    >
+      <div
+        id="itemFitur"
+        class="bg-white p-8 rounded-md max-h-[90vh] max-w-[97%] overflow-y-auto opacity-0 scale-95 transition-all duration-300"
+      >
+        <span class="flex py-2 font-semibold border-b-2 border-blue-600 mb-4">
+          Filter Data Wisudawan
+        </span>
+        <form
+          action=""
+          class="flex flex-wrap gap-3 w-96 justify-between gap-y-6"
+        >
+          <select
+            class="w-36 border outline-none ring-0 focus:ring-1 p-2 rounded-md"
+            name=""
+            id=""
+          >
+            <option value="">Tahun Masuk</option>
+            <option value="">2021</option>
+            <option value="">2020</option>
+            <option value="">2019</option>
+          </select>
+          <select
+            class="w-36 border outline-none ring-0 focus:ring-1 p-2 rounded-md"
+            name=""
+            id=""
+          >
+            <option value="">Jenjang</option>
+            <option value="">S1</option>
+            <option value="">S2</option>
+            <option value="">S3</option>
+          </select>
+          <select
+            class="w-36 border outline-none ring-0 focus:ring-1 p-2 rounded-md"
+            name=""
+            id=""
+          >
+            <option value="">Fakultas</option>
+            <option value="">Teknik</option>
+            <option value="">Farmasi</option>
+            <option value="">Kedokteran</option>
+          </select>
+          <select
+            class="w-36 border outline-none ring-0 focus:ring-1 p-2 rounded-md"
+            name=""
+            id=""
+          >
+            <option value="">Prodi</option>
+            <option value="">Teknik Informatika</option>
+            <option value="">Farmasi</option>
+            <option value="">Hukum Ekonomi Syariah</option>
+          </select>
+          <div class="w-full flex justify-end gap-3">
+            <button
+              id="buttonCloseFilter"
+              class="flex items-center gap-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-600 rounded"
+              type="button"
+            >
+              <ion-icon name="close-circle-outline"></ion-icon>
+              Close
+            </button>
+            <button
+              type="submit"
+              class="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded"
+            >
+              <ion-icon name="arrow-redo-circle-outline"></ion-icon> Apply
+              Filter
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script>
+      // Modal Check List
+      const modalCheckList = document.getElementById("modalCheckList");
+      const itemCheckList = document.getElementById("itemCheckList");
+      const buttonOpenModal = document.querySelectorAll("#buttonOpenModal");
+      const buttonCloseModal = document.getElementById("buttonCloseModal");
+      buttonOpenModal.forEach((button) => {
+        button.addEventListener("click", () => {
+          modalCheckList.classList.remove("hidden");
+          setTimeout(() => {
+            modalCheckList.classList.add("opacity-100");
+            itemCheckList.classList.remove("opacity-0", "scale-95");
+            itemCheckList.classList.add("opacity-100", "scale-100");
+          }, 10);
+        });
+      });
+
+      buttonCloseModal.addEventListener("click", () => {
+        modalCheckList.classList.remove("opacity-100");
+        itemCheckList.classList.remove("opacity-100", "scale-100");
+
+        itemCheckList.classList.add("opacity-0", "scale-95");
+
+        setTimeout(() => {
+          modalCheckList.classList.add("hidden");
+        }, 200);
+      });
+
+      // Modal Fitur
+      const modalFitur = document.getElementById("modalFitur");
+      const itemFitur = document.getElementById("itemFitur");
+      const buttonOpenFitur = document.getElementById("buttonOpenFitur");
+      const buttonCloseFilter = document.getElementById("buttonCloseFilter");
+      buttonOpenFitur.addEventListener("click", () => {
+        modalFitur.classList.remove("hidden");
+
+        setTimeout(() => {
+          modalFitur.classList.add("opacity-100");
+          itemFitur.classList.remove("opacity-0", "scale-95");
+          itemFitur.classList.add("opacity-100", "scale-100");
+        }, 10);
+      });
+
+      buttonCloseFilter.addEventListener("click", () => {
+        modalFitur.classList.remove("opacity-100");
+        itemFitur.classList.remove("opacity-100", "scale-100");
+
+        itemFitur.classList.add("opacity-0", "scale-95");
+
+        setTimeout(() => {
+          modalFitur.classList.add("hidden");
+        }, 200);
+      });
+
+      // Userbutton
+      const userButton = document.getElementById("userButton");
+      const userDropdown = document.getElementById("userDropdown");
+      userButton.addEventListener("mouseover", () => {
+        userDropdown.classList.remove("hidden");
+      });
+      userButton.addEventListener("mouseleave", (e) => {
+        if (!userDropdown.matches(":hover")) {
+          userDropdown.classList.add("hidden");
+        }
+      });
+      userDropdown.addEventListener("mouseleave", () => {
+        userDropdown.classList.add("hidden");
+      });
+      // Datatables
+      $(document).ready(function () {
+        var table = $("#mydatatable").DataTable({
+          dom: "Bflrtip",
+          buttons: ["excelHtml5", "pdfHtml5", "print"],
+          initComplete: function () {
+            // Styling
+            $("div.dataTables_filter input").addClass(
+              "border border-gray-300 rounded-md px-3 py-1 focus:outline-none focus:ring-0 focus:border-gray-400"
+            );
+            $("div.dataTables_length select").addClass(
+              "border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-0 focus-border-gray-400"
+            );
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
