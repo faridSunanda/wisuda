@@ -105,14 +105,7 @@
             Dashboard
           </a>
           <div class="px-4 py-3 text-[0.8rem] text-gray-400">Menu</div>
-          <a
-            href="/admin/data-wisudawan"
-            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-          >
-            <ion-icon name="people-outline"></ion-icon>
-            Data Wisudawan
-          </a>
-          <!-- Setting -->
+          <!-- Master -->
           <div x-data="{ open: false }">
             <button
               @click="open = !open"
@@ -120,23 +113,13 @@
             >
               <span class="flex items-center gap-2">
                 <ion-icon name="settings-outline"></ion-icon>
-                Setting
+                Master
               </span>
-              <svg
+              <ion-icon
                 :class="{'rotate-90': open}"
                 class="w-4 h-4 transform transition-transform"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+                name="caret-forward-outline"
+              ></ion-icon>
             </button>
             <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
               <a
@@ -152,22 +135,54 @@
                 Dokumen Persyaratan
               </a>
               <a
-                href="/admin/jadwal-pendaftaran"
+                href="/admin/group"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Jadwal Pendaftaran
+                Group
               </a>
               <a
-                href="/admin/jadwal-wisuda"
+                href="/admin/sesi"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Jadwal Wisuda
+                Sesi
+              </a>
+            </div>
+          </div>
+          <a
+            href="/admin/data-wisudawan"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="people-outline"></ion-icon>
+            Data Wisudawan
+          </a>
+          <!-- Wisuda -->
+          <div x-data="{ open: false }">
+            <button
+              @click="open = !open"
+              class="w-full flex justify-between items-center px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <span class="flex items-center gap-2">
+                <ion-icon name="school-outline"></ion-icon>
+                Wisuda
+              </span>
+              <ion-icon
+                :class="{'rotate-90': open}"
+                class="w-4 h-4 transform transition-transform"
+                name="caret-forward-outline"
+              ></ion-icon>
+            </button>
+            <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
+              <a
+                href="/admin/wisuda"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Wisuda
               </a>
               <a
-                href="/admin/kuota-wisudawan"
+                href="/admin/jadwal_pelaksanaan"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Kuota Wisudawan
+                Jadwal Pelaksanaan
               </a>
             </div>
           </div>
@@ -290,6 +305,9 @@
                 <th class="p-4">No Urut</th>
                 <th class="p-4">Nama Lengkap</th>
                 <th class="p-4">NIM</th>
+                <th class="p-4">Angkatan</th>
+                <th class="p-4">Group</th>
+                <th class="p-4">Sesi</th>
                 <th class="p-4">Jenjang</th>
                 <th class="p-4">Fakultas</th>
                 <th class="p-4">Prodi</th>
@@ -298,11 +316,16 @@
             </thead>
             <tbody class="divide-y divide-gray-100">
               <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
-                <td class="px-4 py-3 border">1</td>
+                <td class="px-4 py-3 border items-center gap-2">
+                  <input type="checkbox" name="" id="" class="check-item" /> 1
+                </td>
                 <td class="px-4 py-3 border text-blue-500 uppercase">
                   Hairudin Farid Sunanda
                 </td>
                 <td class="px-4 py-3 border">21103041039</td>
+                <td class="px-4 py-3 border">44</td>
+                <td class="px-4 py-3 border">Kanan</td>
+                <td class="px-4 py-3 border">Kedua</td>
                 <td class="px-4 py-3 border">S1</td>
                 <td class="px-4 py-3 border">Teknik</td>
                 <td class="px-4 py-3 border">Teknik Informatika</td>
@@ -319,17 +342,28 @@
                       title="Edit"
                     >
                       <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <button
+                      class="bg-red-500 buttonDeleteModalConfirmation hover:bg-red-600 text-white px-[8px] py-[7px] rounded transition text-xs"
+                      title="Hapus"
+                    >
+                      <i class="fa-solid fa-trash"></i>
                     </button>
                   </div>
                 </td>
               </tr>
 
               <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
-                <td class="px-4 py-3 border">2</td>
+                <td class="px-4 py-3 border items-center gap-2">
+                  <input type="checkbox" name="" id="" class="check-item" /> 2
+                </td>
                 <td class="px-4 py-3 border text-blue-500 uppercase">
                   Farid Sunanda
                 </td>
                 <td class="px-4 py-3 border">21103041009</td>
+                <td class="px-4 py-3 border">44</td>
+                <td class="px-4 py-3 border">Kiri</td>
+                <td class="px-4 py-3 border">Pertama</td>
                 <td class="px-4 py-3 border">S1</td>
                 <td class="px-4 py-3 border">Teknik</td>
                 <td class="px-4 py-3 border">Teknik Informatika</td>
@@ -347,11 +381,28 @@
                     >
                       <i class="fa-solid fa-pencil"></i>
                     </button>
+                    <button
+                      class="bg-red-500 buttonDeleteModalConfirmation hover:bg-red-600 text-white px-[8px] py-[7px] rounded transition text-xs"
+                      title="Hapus"
+                    >
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
+          <div class="w-full flex justify-center flex-wrap">
+            <div class="p-1 w-full flex justify-center gap-1">
+              <input type="checkbox" name="checkAll" id="checkAll" />
+              <label for="checkAll">Pilih Semua</label>
+            </div>
+            <button
+              class="bg-blue-500 hover:bg-blue-600 transition text-white px-4 py-2 rounded-md flex items-center gap-1"
+            >
+              Pindahkan Ke <ion-icon name="arrow-redo-outline"></ion-icon>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -380,6 +431,27 @@
     ></script>
 
     <script>
+      // Checkbox select all
+      const checkAll = document.getElementById("checkAll");
+      const checkItems = document.querySelectorAll(".check-item");
+      checkAll.addEventListener("change", function () {
+        checkItems.forEach((item) => {
+          item.checked = this.checked;
+        });
+      });
+      checkItems.forEach((item) => {
+        item.addEventListener("change", function () {
+          if (!this.checked) {
+            checkAll.checked = false;
+          } else if (
+            document.querySelectorAll(".check-item:checked").length ===
+            checkItems.length
+          ) {
+            checkAll.checked = true;
+          }
+        });
+      });
+
       // Userbutton
       const userButton = document.getElementById("userButton");
       const userDropdown = document.getElementById("userDropdown");

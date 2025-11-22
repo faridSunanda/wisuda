@@ -105,38 +105,21 @@
             Dashboard
           </a>
           <div class="px-4 py-3 text-[0.8rem] text-gray-400">Menu</div>
-          <a
-            href="/admin/data-wisudawan"
-            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-          >
-            <ion-icon name="people-outline"></ion-icon>
-            Data Wisudawan
-          </a>
-          <!-- Setting -->
-          <div x-data="{ open: true }">
+          <!-- Master -->
+          <div x-data="{ open: false }">
             <button
               @click="open = !open"
               class="w-full flex justify-between items-center px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
             >
               <span class="flex items-center gap-2">
                 <ion-icon name="settings-outline"></ion-icon>
-                Setting
+                Master
               </span>
-              <svg
+              <ion-icon
                 :class="{'rotate-90': open}"
                 class="w-4 h-4 transform transition-transform"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+                name="caret-forward-outline"
+              ></ion-icon>
             </button>
             <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
               <a
@@ -152,22 +135,54 @@
                 Dokumen Persyaratan
               </a>
               <a
-                href="/admin/jadwal-pendaftaran"
+                href="/admin/group"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Jadwal Pendaftaran
+                Group
               </a>
               <a
-                href="/admin/jadwal-wisuda"
+                href="/admin/sesi"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Sesi
+              </a>
+            </div>
+          </div>
+          <a
+            href="/admin/data-wisudawan"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="people-outline"></ion-icon>
+            Data Wisudawan
+          </a>
+          <!-- Wisuda -->
+          <div x-data="{ open: true }">
+            <button
+              @click="open = !open"
+              class="w-full flex justify-between items-center px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <span class="flex items-center gap-2">
+                <ion-icon name="school-outline"></ion-icon>
+                Wisuda
+              </span>
+              <ion-icon
+                :class="{'rotate-90': open}"
+                class="w-4 h-4 transform transition-transform"
+                name="caret-forward-outline"
+              ></ion-icon>
+            </button>
+            <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
+              <a
+                href="/admin/wisuda"
                 class="active block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Jadwal Wisuda
+                Wisuda
               </a>
               <a
-                href="/admin/kuota-wisudawan"
+                href="/admin/jadwal_pelaksanaan"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Kuota Wisudawan
+                Jadwal Pelaksanaan
               </a>
             </div>
           </div>
@@ -258,7 +273,7 @@
       <h2
         class="inline-block mb-6 text-lg font-semibold text-gray-700 border-b-4 border-[#435EBE] pb-1"
       >
-        Jadwal Wisuda
+        Wisuda
       </h2>
 
       <!-- Dashboard -->
@@ -281,24 +296,24 @@
           >
             <thead class="bg-gray-100">
               <tr>
-                <th class="p-4">No</th>
-                <th class="p-4">Nama Kegiatan</th>
-                <th class="p-4">Waktu Pelaksanaan</th>
-                <th class="p-4">Tanggal Pelaksanaan</th>
-                <th class="p-4">Tempat Pelaksanaan</th>
-                <th class="p-4">Keterangan</th>
+                <th class="p-4 max-w-4">No</th>
+                <th class="p-4">Angkatan</th>
+                <th class="p-4">Tanggal Pendaftaran</th>
+                <th class="p-4">Tanggal Penutupan</th>
+                <th class="p-4">Kuota Wisudawan</th>
+                <th class="p-4">Status</th>
                 <th class="p-4">Aksi</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
               <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
                 <td class="px-4 py-3 border">1</td>
-                <td class="px-4 py-3 border">Gladi Bersih</td>
-                <td class="px-4 py-3 border">13:00 WIB</td>
-                <td class="px-4 py-3 border">20 Oktober 2025</td>
-                <td class="px-4 py-3 border">Masjid Agung Jawa Tengah</td>
-                <td class="px-4 py-3 border">
-                  Pelaksanaan Gladi Bersih Wisuda Ke XXI
+                <td class="px-4 py-3 border">44</td>
+                <td class="px-4 py-3 border">20 Juni 2025 00:00 WIB</td>
+                <td class="px-4 py-3 border">20 September 2025 00:00 WIB</td>
+                <td class="px-4 py-3 border">1300</td>
+                <td class="px-4 py-3 border text-green-600 font-semibold">
+                  Aktif
                 </td>
                 <td class="px-4 py-3 border text-center">
                   <div class="flex justify-center gap-1">
@@ -319,12 +334,12 @@
               </tr>
               <tr class="hover:bg-gray-50 transition duration-150 ease-in-out">
                 <td class="px-4 py-3 border">2</td>
-                <td class="px-4 py-3 border">Wisuda</td>
-                <td class="px-4 py-3 border">06:00 WIB</td>
-                <td class="px-4 py-3 border">21 Oktober 2025</td>
-                <td class="px-4 py-3 border">Masjid Agung Jawa Tengah</td>
-                <td class="px-4 py-3 border">
-                  Pelaksanaan Wisuda Ke XXI Universitas Wahid Hasyim
+                <td class="px-4 py-3 border">43</td>
+                <td class="px-4 py-3 border">20 Januari 2025 00:00 WIB</td>
+                <td class="px-4 py-3 border">20 Maret 2025 00:00 WIB</td>
+                <td class="px-4 py-3 border">700</td>
+                <td class="px-4 py-3 border text-red-600 font-semibold">
+                  Tidak Aktif
                 </td>
                 <td class="px-4 py-3 border text-center">
                   <div class="flex justify-center gap-1">
@@ -390,7 +405,7 @@
       // Datatables
       $(document).ready(function () {
         var table = $("#mydatatable").DataTable({
-          dom: "Bflrtip",
+          dom: "flrtip",
           buttons: ["excelHtml5", "pdfHtml5", "print"],
           initComplete: function () {
             // Styling

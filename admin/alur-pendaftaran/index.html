@@ -105,14 +105,7 @@
             Dashboard
           </a>
           <div class="px-4 py-3 text-[0.8rem] text-gray-400">Menu</div>
-          <a
-            href="/admin/data-wisudawan"
-            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-          >
-            <ion-icon name="people-outline"></ion-icon>
-            Data Wisudawan
-          </a>
-          <!-- Setting -->
+          <!-- Master -->
           <div x-data="{ open: true }">
             <button
               @click="open = !open"
@@ -120,23 +113,13 @@
             >
               <span class="flex items-center gap-2">
                 <ion-icon name="settings-outline"></ion-icon>
-                Setting
+                Master
               </span>
-              <svg
+              <ion-icon
                 :class="{'rotate-90': open}"
                 class="w-4 h-4 transform transition-transform"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+                name="caret-forward-outline"
+              ></ion-icon>
             </button>
             <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
               <a
@@ -152,26 +135,57 @@
                 Dokumen Persyaratan
               </a>
               <a
-                href="/admin/jadwal-pendaftaran"
+                href="/admin/group"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Jadwal Pendaftaran
+                Group
               </a>
               <a
-                href="/admin/jadwal-wisuda"
+                href="/admin/sesi"
                 class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
               >
-                Jadwal Wisuda
-              </a>
-              <a
-                href="/admin/kuota-wisudawan"
-                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-              >
-                Kuota Wisudawan
+                Sesi
               </a>
             </div>
           </div>
-
+          <a
+            href="/admin/data-wisudawan"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+          >
+            <ion-icon name="people-outline"></ion-icon>
+            Data Wisudawan
+          </a>
+          <!-- Wisuda -->
+          <div x-data="{ open: false }">
+            <button
+              @click="open = !open"
+              class="w-full flex justify-between items-center px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+            >
+              <span class="flex items-center gap-2">
+                <ion-icon name="school-outline"></ion-icon>
+                Wisuda
+              </span>
+              <ion-icon
+                :class="{'rotate-90': open}"
+                class="w-4 h-4 transform transition-transform"
+                name="caret-forward-outline"
+              ></ion-icon>
+            </button>
+            <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
+              <a
+                href="/admin/wisuda"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Wisuda
+              </a>
+              <a
+                href="/admin/jadwal_pelaksanaan"
+                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+              >
+                Jadwal Pelaksanaan
+              </a>
+            </div>
+          </div>
           <!-- Download PPT -->
           <a
             href="/admin/download-ppt"
@@ -359,7 +373,7 @@
       // Datatables
       $(document).ready(function () {
         var table = $("#mydatatable").DataTable({
-          dom: "Bflrtip",
+          dom: "flrtip",
           buttons: ["excelHtml5", "pdfHtml5", "print"],
           initComplete: function () {
             // Styling
