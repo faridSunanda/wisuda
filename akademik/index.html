@@ -57,89 +57,19 @@
         <nav class="flex-1 p-4 space-y-2">
           <!-- Dashboard -->
           <a
-            href="/mahasiswa"
+            href="/akademik"
             class="active flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
           >
             <ion-icon name="grid-outline"></ion-icon>
             Dashboard
           </a>
-          <div class="px-4 py-3 text-[0.8rem] text-gray-400">Pendaftaran</div>
+          <div class="px-4 py-3 text-[0.8rem] text-gray-400">Menu</div>
           <a
-            href="/mahasiswa/pembayaran"
-            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-          >
-            <ion-icon name="card-outline"></ion-icon>
-            Pembayaran
-          </a>
-          <a
-            href="/mahasiswa/data-diri"
+            href="/akademik/data-wisudawan"
             class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
           >
             <ion-icon name="people-outline"></ion-icon>
-            Data Diri
-          </a>
-          <!-- Sertifikat -->
-          <div x-data="{ open: false }">
-            <button
-              @click="open = !open"
-              class="w-full flex gap-2 justify-between items-center px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-            >
-              <span>
-                <ion-icon name="documents-outline"></ion-icon>
-                Sertifikat
-              </span>
-              <ion-icon
-                :class="{'rotate-90': open}"
-                class="w-4 h-4 transform transition-transform"
-                name="caret-forward-outline"
-              ></ion-icon>
-            </button>
-            <div x-show="open" class="ml-6 mt-1 space-y-1 text-sm">
-              <a
-                href="/mahasiswa/sertifikat-kompetensi"
-                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-              >
-                Sertifikat Kompetensi
-              </a>
-              <a
-                href="/mahasiswa/sertifikat-bahasa-internasional"
-                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-              >
-                Sertifikat Bahasa Internasional
-              </a>
-              <a
-                href="/mahasiswa/sertifikat-magang"
-                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-              >
-                Sertifikat Magang
-              </a>
-              <a
-                href="/mahasiswa/sertifikat-pendidikan-karakter"
-                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-              >
-                Sertifikat Pendidikan Karakter
-              </a>
-              <a
-                href="/mahasiswa/sertifikat-penghargaan"
-                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-              >
-                Sertifikat Penghargaan
-              </a>
-              <a
-                href="/mahasiswa/sertifikat-organisasi"
-                class="block px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-              >
-                Sertifikat Organisasi
-              </a>
-            </div>
-          </div>
-          <!-- Download Formulir -->
-          <a
-            href="/mahasiswa/download-formulir"
-            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
-          >
-            <ion-icon name="cloud-download-outline"></ion-icon>
-            Download Formulir
+            Data Wisudawan
           </a>
         </nav>
       </aside>
@@ -290,7 +220,7 @@
             <canvas id="tahunMasukChart"></canvas>
           </div>
 
-          <!-- Pie Chart 2: Berdasarkan Jenis Kelamin -->
+          <!-- Pie Chart 2: Berdasarkan Jenjang -->
           <div
             class="bg-white p-6 shadow-md rounded-xl border border-gray-100 w-[32%]"
           >

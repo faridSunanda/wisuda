@@ -31,17 +31,34 @@
       #boxTable::-webkit-scrollbar {
         height: 4px;
       }
-      main::-webkit-scrollbar-thumb {
-        background: #c0c0c0;
-        border-radius: 10px;
+      #judul_skripsi::-webkit-scrollbar {
+        width: 2px;
       }
-      aside:hover::-webkit-scrollbar-thumb {
+
+      aside::-webkit-scrollbar-thumb,
+      #judul_skripsi::-webkit-scrollbar-thumb,
+      main::-webkit-scrollbar-thumb {
         background: #c0c0c0;
         border-radius: 10px;
       }
       #boxTable::-webkit-scrollbar-thumb {
         background: #8c8e8d;
         border-radius: 10px;
+      }
+
+      /* Datatables*/
+      div.dataTables_wrapper div.dt-buttons {
+        margin-bottom: 10px;
+      }
+      div.dataTables_wrapper div.dataTables_filter {
+        clear: both;
+        margin-bottom: 10px;
+      }
+      .ts-wrapper {
+        width: 100% !important;
+      }
+      .ts-dropdown {
+        width: 100% !important;
       }
     </style>
   </head>
@@ -58,7 +75,7 @@
           <!-- Dashboard -->
           <a
             href="/mahasiswa"
-            class="active flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
           >
             <ion-icon name="grid-outline"></ion-icon>
             Dashboard
@@ -136,7 +153,7 @@
           <!-- Download Formulir -->
           <a
             href="/mahasiswa/download-formulir"
-            class="flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
+            class="active flex items-center gap-2 px-4 py-3 rounded hover:bg-[#435EBE] hover:text-white transition"
           >
             <ion-icon name="cloud-download-outline"></ion-icon>
             Download Formulir
@@ -217,88 +234,45 @@
           </div>
         </div>
       </header>
-      <!-- Title -->
-      <h2
-        class="inline-block mb-6 text-lg font-semibold text-gray-700 border-b-4 border-[#435EBE] pb-1"
+
+      <!-- Download Formulir -->
+      <section
+        class="py-10 bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 mt-6 shadow-lg border border-gray-100"
       >
-        Dashboard
-      </h2>
+        <!-- Title -->
+        <h2
+          class="inline-block mb-6 text-lg font-semibold text-gray-700 border-b-4 border-[#435EBE] pb-1"
+        >
+          Download Formulir
+        </h2>
 
-      <!-- Dashboard -->
-      <section class="py-16 bg-white rounded-md border">
-        <div class="flex justify-between p-6">
-          <div
-            class="w-[32%] relative h-[150px] bg-white rounded-md p-6 font-semibold shadow-md"
-          >
-            <p>Wisudawan Verified</p>
-            <span class="text-3xl font-bold">128</span>
-            <span
-              class="absolute bottom-6 left-6 w-[85%] h-[3px] rounded bg-green-300"
+        <p
+          class="flex text-sm py-3 items-center gap-1 mb-3 border-l-4 pl-2 border-orange-400 text-orange-600 bg-orange-100"
+        >
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          Pastikan semua data suah benar sebelum endownload formulir.
+        </p>
+
+        <div class="h-screen overflow-hidden">
+          <div class="my-4 flex gap-4">
+            <a
+              href="/mahasiswa/data-diri"
+              class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-3 rounded-md transition flex items-center gap-1 w-fit"
+              ><ion-icon name="create-outline"></ion-icon> Ubah Data Diri</a
             >
-            </span>
-            <span
-              class="absolute top-6 right-6 w-[70px] h-[50px] rounded bg-green-300"
-            ></span>
-          </div>
-          <div
-            class="w-[32%] relative h-[150px] bg-white rounded-md p-6 font-semibold shadow-md"
-          >
-            <p>Wisudawan Not Verified</p>
-            <span class="text-3xl font-bold">98</span>
-            <span
-              class="absolute bottom-6 left-6 w-[85%] h-[3px] rounded bg-[#96cafa]"
+            <a
+              href="/ppt/Formulir Wisuda.docx"
+              class="bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-md transition flex items-center gap-1 w-fit"
+              ><ion-icon name="cloud-download-outline"></ion-icon> Download</a
             >
-            </span>
-            <span
-              class="absolute top-6 right-6 w-[70px] h-[50px] rounded bg-[#96cafa]"
-            ></span>
-            <div></div>
           </div>
-          <div
-            class="w-[32%] relative h-[150px] bg-white rounded-md p-6 font-semibold shadow-md"
+          <iframe
+            src="https://view.officeapps.live.com/op/embed.aspx?src=https://wisuda-uwh.vercel.app/ppt/Formulir%20Wisuda.docx"
+            frameborder="0"
+            width="100%"
+            height="100%"
           >
-            <p>Mahasiswa Lulus</p>
-            <span class="text-3xl font-bold">1020</span>
-            <span
-              class="absolute bottom-6 left-6 w-[85%] h-[3px] rounded bg-[#FF8A8A]"
-            >
-            </span>
-            <span
-              class="absolute top-6 right-6 w-[70px] h-[50px] rounded bg-[#FF8A8A]"
-            ></span>
-          </div>
-        </div>
-
-        <div class="mx-auto px-6 flex justify-between">
-          <!-- Pie Chart 1: Berdasarkan Fakultas -->
-          <div
-            class="bg-white p-6 shadow-md rounded-xl border border-gray-100 w-[32%]"
-          >
-            <h3 class="font-semibold mb-4 text-gray-700 text-center">
-              Wisudawan Berdasarkan Fakultas
-            </h3>
-            <canvas id="fakultasChart"></canvas>
-          </div>
-
-          <!-- Pie Chart 1: Berdasarkan Fakultas -->
-          <div
-            class="bg-white p-6 shadow-md rounded-xl border border-gray-100 w-[32%]"
-          >
-            <h3 class="font-semibold mb-4 text-gray-700 text-center">
-              Wisudawan Berdasarkan Tahun Masuk
-            </h3>
-            <canvas id="tahunMasukChart"></canvas>
-          </div>
-
-          <!-- Pie Chart 2: Berdasarkan Jenis Kelamin -->
-          <div
-            class="bg-white p-6 shadow-md rounded-xl border border-gray-100 w-[32%]"
-          >
-            <h3 class="font-semibold mb-4 text-gray-700 text-center">
-              Wisudawan Berdasarkan Jenjang
-            </h3>
-            <canvas id="jenjangChart"></canvas>
-          </div>
+          </iframe>
         </div>
       </section>
 
@@ -320,92 +294,11 @@
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
     ></script>
-
     <script
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
-
     <script>
-      const dataFakultas = {
-        labels: [
-          "Fakultas Teknik",
-          "Fakultas Hukum",
-          "Fakultas Ekonomi",
-          "Fakultas Kedokteran",
-        ],
-        values: [50, 30, 40, 20],
-      };
-
-      const dataTahunMasuk = {
-        labels: ["2021", "2020", "2019", "2018"],
-        values: [642, 321, 13, 23],
-      };
-
-      const dataJenjang = {
-        labels: ["S1", "S2", "S3"],
-        values: [630, 80, 17],
-      };
-
-      //  Pie Chart Fakultas
-      const ctxFakultas = document
-        .getElementById("fakultasChart")
-        .getContext("2d");
-      new Chart(ctxFakultas, {
-        type: "pie",
-        data: {
-          labels: dataFakultas.labels,
-          datasets: [
-            {
-              data: dataFakultas.values,
-              backgroundColor: ["#60A5FA", "#34D399", "#FBBF24", "#F87171"],
-            },
-          ],
-        },
-        options: {
-          plugins: { legend: { position: "bottom" } },
-        },
-      });
-
-      const ctxTahunMasuk = document
-        .getElementById("tahunMasukChart")
-        .getContext("2d");
-      new Chart(ctxTahunMasuk, {
-        type: "pie",
-        data: {
-          labels: dataTahunMasuk.labels,
-          datasets: [
-            {
-              data: dataTahunMasuk.values,
-              backgroundColor: ["#34D399", "#60A5FA", "#F87171", "#FBBF24"],
-            },
-          ],
-        },
-        options: {
-          plugins: { legend: { position: "bottom" } },
-        },
-      });
-
-      //  Pie Chart Jenjang
-      const ctxJenjang = document
-        .getElementById("jenjangChart")
-        .getContext("2d");
-      new Chart(ctxJenjang, {
-        type: "pie",
-        data: {
-          labels: dataJenjang.labels,
-          datasets: [
-            {
-              data: dataJenjang.values,
-              backgroundColor: ["#818CF8", "#F472B6", "#FBBF24"],
-            },
-          ],
-        },
-        options: {
-          plugins: { legend: { position: "bottom" } },
-        },
-      });
-
       // Userbutton
       const userButton = document.getElementById("userButton");
       const userDropdown = document.getElementById("userDropdown");
@@ -420,6 +313,59 @@
       userDropdown.addEventListener("mouseleave", () => {
         userDropdown.classList.add("hidden");
       });
+
+      (function () {
+        // Fill visible VA displays from input
+        const vaInput = document.getElementById("vaInput");
+        const va =
+          vaInput.getAttribute("data-va") ||
+          vaInput.value ||
+          "7654323456776543212";
+        [
+          "vaDisplay1",
+          "vaDisplay2",
+          "vaDisplay3",
+          "vaDisplay4",
+          "vaDisplay5",
+        ].forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = va;
+        });
+
+        // Copy button
+        document
+          .getElementById("copyBtn")
+          .addEventListener("click", async () => {
+            try {
+              await navigator.clipboard.writeText(va);
+              const btn = document.getElementById("copyBtn");
+              const old = btn.textContent;
+              btn.textContent = "Copied";
+              setTimeout(() => (btn.textContent = old), 1500);
+            } catch (e) {
+              alert("Gagal copy — silakan copy manual: " + va);
+            }
+          });
+
+        // Tabs logic
+        const tabs = document.querySelectorAll(".tab-btn");
+        const panels = document.querySelectorAll(".tab-panel");
+        tabs.forEach((t, idx) => {
+          t.addEventListener("click", () => {
+            tabs.forEach((x) =>
+              x.classList.remove("bg-indigo-50", "text-indigo-700")
+            );
+            panels.forEach((p) => p.classList.add("hidden"));
+            t.classList.add("bg-indigo-50", "text-indigo-700");
+            const panel = document.querySelector(
+              `[data-panel="${t.getAttribute("data-tab")}"]`
+            );
+            if (panel) panel.classList.remove("hidden");
+          });
+        });
+        // Activate first tab
+        if (tabs.length) tabs[0].click();
+      })();
     </script>
   </body>
 </html>
