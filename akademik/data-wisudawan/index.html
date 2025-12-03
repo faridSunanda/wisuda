@@ -246,6 +246,13 @@
                     >
                       <ion-icon name="sync-outline"></ion-icon>
                     </a>
+                    <button
+                      id="buttonOpenCheckmark"
+                      class="h-8 w-8 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded transition"
+                      title="Check Mark Berkas"
+                    >
+                      <ion-icon name="checkmark-done-outline"></ion-icon>
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -269,6 +276,12 @@
                     >
                       <ion-icon name="sync-outline"></ion-icon>
                     </a>
+                    <button
+                      class="h-8 w-8 flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white rounded transition"
+                      title="Check Mark Berkas"
+                    >
+                      <ion-icon name="checkmark-done-outline"></ion-icon>
+                    </button>
                   </div>
                 </td>
               </tr>
@@ -368,6 +381,52 @@
       </div>
     </section>
 
+    <!-- Modal Checkmark -->
+    <section
+      id="modalCheckmark"
+      class="absolute top-0 left-0 z-50 bg-black/70 w-full min-h-screen flex justify-center items-center transition-opacity hidden"
+    >
+      <div
+        id="itemCheckmark"
+        class="bg-white p-8 rounded-md max-h-[90vh] max-w-[97%] overflow-y-auto scale-95 transition-all duration-300 opacity-0"
+      >
+        <span class="flex py-2 font-semibold border-b-2 border-blue-600 mb-4">
+          Berkas Wisudawan
+        </span>
+        <table>
+          <thead>
+            <tr>
+              <th class="p-4 border">No</th>
+              <th class="p-4 border">Jenis Berkas</th>
+              <th class="p-4 border">Jumlah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="p-4 border">1</td>
+              <td class="p-4 border">Surat Keterangan Lulus</td>
+              <td class="p-4 border">4 lbr</td>
+            </tr>
+            <tr>
+              <td class="p-4 border">2</td>
+              <td class="p-4 border">Ijazah</td>
+              <td class="p-4 border">4 lbr</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="w-full flex justify-end gap-3 mt-4">
+          <button
+            id="buttonCloseCheckmark"
+            class="flex items-center gap-2 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-600 rounded"
+            type="button"
+          >
+            <ion-icon name="close-circle-outline"></ion-icon>
+            Close
+          </button>
+        </div>
+      </div>
+    </section>
+
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -402,6 +461,36 @@
 
         setTimeout(() => {
           modalFitur.classList.add("hidden");
+        }, 200);
+      });
+
+      // Modal Checkmark
+      const modalCheckmark = document.getElementById("modalCheckmark");
+      const itemCheckmark = document.getElementById("itemCheckmark");
+      const buttonOpenCheckmark = document.getElementById(
+        "buttonOpenCheckmark"
+      );
+      const buttonCloseCheckmark = document.getElementById(
+        "buttonCloseCheckmark"
+      );
+      buttonOpenCheckmark.addEventListener("click", () => {
+        modalCheckmark.classList.remove("hidden");
+
+        setTimeout(() => {
+          modalCheckmark.classList.add("opacity-100");
+          itemCheckmark.classList.remove("opacity-0", "scale-95");
+          itemCheckmark.classList.add("opacity-100", "scale-100");
+        }, 10);
+      });
+
+      buttonCloseCheckmark.addEventListener("click", () => {
+        modalCheckmark.classList.remove("opacity-100");
+        itemCheckmark.classList.remove("opacity-100", "scale-100");
+
+        itemCheckmark.classList.add("opacity-0", "scale-95");
+
+        setTimeout(() => {
+          modalCheckmark.classList.add("hidden");
         }, 200);
       });
 
